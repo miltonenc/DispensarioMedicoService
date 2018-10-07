@@ -13,6 +13,7 @@ public class MedicoEntity {
     private PersonaEntity persona;
     private MedicoEspecialidadEntity especialidad;
     private String tandaLabor;
+    private UsuarioEntity usuario;
     private int estado;
     List<RegistroVisitaEntity> registrosVisitas;
 
@@ -59,6 +60,16 @@ public class MedicoEntity {
 
     public void setTandaLabor(String tandaLabor) {
         this.tandaLabor = tandaLabor;
+    }
+
+    @JoinColumn(name = "USUARIO_ID", referencedColumnName = "ID")
+    @ManyToOne()
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
     }
 
     @Basic

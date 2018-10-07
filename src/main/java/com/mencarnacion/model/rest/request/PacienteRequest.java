@@ -12,6 +12,8 @@ public class PacienteRequest {
     private String dni;
     private Long tipoId;
     private String carnet;
+    private String usuario;
+    private String password;
     private int estado;
 
     public PacienteRequest() {
@@ -80,5 +82,21 @@ public class PacienteRequest {
 
     public void setEstado(int estado) {
         this.estado = estado;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

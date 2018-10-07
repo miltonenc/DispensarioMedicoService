@@ -1,15 +1,13 @@
 package com.mencarnacion.service.impl;
 
-import com.mencarnacion.model.entities.PacienteEntity;
-import com.mencarnacion.model.entities.PersonaEntity;
+import com.mencarnacion.model.entities.*;
 import com.mencarnacion.model.rest.request.PacienteRequest;
 import com.mencarnacion.model.rest.response.ListadoPacienteResponse;
 import com.mencarnacion.model.rest.response.PacienteResponse;
 import com.mencarnacion.model.rest.response.RespuestaType;
-import com.mencarnacion.repository.PacienteRepository;
-import com.mencarnacion.repository.PersonaRepository;
-import com.mencarnacion.repository.TipoPacienteRepository;
+import com.mencarnacion.repository.*;
 import com.mencarnacion.service.PacienteService;
+import com.mencarnacion.util.Rol;
 import com.mencarnacion.util.TipoMensaje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +29,15 @@ public class PacienteServiceImpl implements PacienteService {
 
     @Autowired
     TipoPacienteRepository tipoPacienteRepository;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
+    @Autowired
+    RolRepository rolRepository;
+
+    @Autowired
+    UsuarioRolRepository usuarioRolRepository;
 
     @Override
     public PacienteResponse guardar(PacienteRequest request) {
@@ -56,14 +63,21 @@ public class PacienteServiceImpl implements PacienteService {
         } else {
             entity = new PacienteEntity();
             PersonaEntity personaEntity = new PersonaEntity();
+            UsuarioEntity usuarioEntity = new UsuarioEntity(request.getUsuario().trim(), request.getPassword().trim());
+            RolEntity rolEntity = rolRepository.buscarPorId(obtenerRolByTipoPaciente(request.getTipoId()));
+            UsuarioRolEntity usuarioRolEntity = new UsuarioRolEntity(usuarioEntity, rolEntity);
             entity.setPersona(personaEntity);
             entity.getPersona().setNombre(request.getNombre());
             entity.getPersona().setApellido(request.getApellido());
             entity.getPersona().setDni(request.getDni());
             entity.setTipo(tipoPacienteRepository.buscarPorId(request.getTipoId()));
 
+            usuarioEntity = usuarioRepository.save(usuarioEntity);
+            usuarioRolEntity = usuarioRolRepository.save(usuarioRolEntity);
             personaEntity = personaRepository.save(personaEntity);
-            if (Objects.nonNull(personaEntity.getId())) {
+
+            if (Objects.nonNull(usuarioEntity.getId()) && Objects.nonNull(usuarioRolEntity.getId())
+                    && Objects.nonNull(personaEntity.getId())) {
                 entity = pacienteRepository.save(entity);
 
                 if (Objects.nonNull(entity.getId())) {
@@ -79,6 +93,15 @@ public class PacienteServiceImpl implements PacienteService {
         }
 
         return response;
+    }
+
+    private Long obtenerRolByTipoPaciente(final Long tipoPaciente){
+        switch (tipoPaciente.intValue()){
+            case 1: return Rol.EMPLEADO.getId();
+            case 2: return Rol.ESTUDIANTE.getId();
+            case 3: return Rol.PROFESOR.getId();
+            default: return Rol.ESTUDIANTE.getId();
+        }
     }
 
     @Override

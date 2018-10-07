@@ -13,6 +13,9 @@
         <class>com.mencarnacion.model.entities.TipoMedicamentoEntity</class>
         <class>com.mencarnacion.model.entities.TipoPacienteEntity</class>
         <class>com.mencarnacion.model.entities.UbicacionEntity</class>
+        <class>com.mencarnacion.model.entities.UsuarioEntity</class>
+        <class>com.mencarnacion.model.entities.UsuarioRolEntity</class>
+        <class>com.mencarnacion.model.entities.RolEntity</class>
         <properties>
             <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/ISO715"/>
             <property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>

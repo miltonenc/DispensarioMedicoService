@@ -1,15 +1,13 @@
 package com.mencarnacion.service.impl;
 
-import com.mencarnacion.model.entities.MedicoEntity;
-import com.mencarnacion.model.entities.PersonaEntity;
+import com.mencarnacion.model.entities.*;
 import com.mencarnacion.model.rest.request.MedicoRequest;
 import com.mencarnacion.model.rest.response.ListadoMedicoResponse;
 import com.mencarnacion.model.rest.response.MedicoResponse;
 import com.mencarnacion.model.rest.response.RespuestaType;
-import com.mencarnacion.repository.MedicoEspecialidadRepository;
-import com.mencarnacion.repository.MedicoRepository;
-import com.mencarnacion.repository.PersonaRepository;
+import com.mencarnacion.repository.*;
 import com.mencarnacion.service.MedicoService;
+import com.mencarnacion.util.Rol;
 import com.mencarnacion.util.TipoMensaje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +29,15 @@ public class MedicoServiceImpl implements MedicoService {
 
     @Autowired
     MedicoEspecialidadRepository medicoEspecialidadRepository;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
+    @Autowired
+    RolRepository rolRepository;
+
+    @Autowired
+    UsuarioRolRepository usuarioRolRepository;
 
     @Override
     public MedicoResponse guardar(MedicoRequest request) {
@@ -56,14 +63,22 @@ public class MedicoServiceImpl implements MedicoService {
         } else {
             entity = new MedicoEntity();
             PersonaEntity personaEntity = new PersonaEntity();
+            UsuarioEntity usuarioEntity = new UsuarioEntity(request.getUsuario().trim(), request.getPassword().trim());
+            RolEntity rolEntity = rolRepository.buscarPorId(Rol.MEDICO.getId());
+            UsuarioRolEntity usuarioRolEntity = new UsuarioRolEntity(usuarioEntity, rolEntity);
+            entity.setUsuario(usuarioEntity);
             entity.setPersona(personaEntity);
             entity.getPersona().setNombre(request.getNombre());
             entity.getPersona().setApellido(request.getApellido());
             entity.getPersona().setDni(request.getDni());
             entity.setEspecialidad(medicoEspecialidadRepository.buscarPorId(request.getEspecialidadId()));
 
+            usuarioEntity = usuarioRepository.save(usuarioEntity);
+            usuarioRolEntity = usuarioRolRepository.save(usuarioRolEntity);
             personaEntity = personaRepository.save(personaEntity);
-            if (Objects.nonNull(personaEntity.getId())) {
+
+            if (Objects.nonNull(usuarioEntity.getId()) && Objects.nonNull(usuarioRolEntity.getId())
+                    && Objects.nonNull(personaEntity.getId())) {
                 entity = medicoRepository.save(entity);
 
                 if (Objects.nonNull(entity.getId())) {

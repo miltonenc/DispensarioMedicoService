@@ -13,11 +13,6 @@ public class DispensarioMedicoServiceApplication {
     }
 
     @Bean
-    public DispensarioMedicoController dispensarioMedicoController() {
-        return new DispensarioMedicoController();
-    }
-
-    @Bean
     public LaboratorioFabricanteController laboratorioFabricanteController() {
         return new LaboratorioFabricanteController();
     }
@@ -60,5 +55,10 @@ public class DispensarioMedicoServiceApplication {
     @Bean
     public UbicacionController ubicacionController() {
         return new UbicacionController();
+    }
+
+    @Bean
+    public UsuarioController usuarioController() {
+        return new UsuarioController();
     }
 }

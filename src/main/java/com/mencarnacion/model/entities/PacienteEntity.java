@@ -14,6 +14,7 @@ public class PacienteEntity {
     private PersonaEntity persona;
     private TipoPacienteEntity tipo;
     private String carnet;
+    private UsuarioEntity usuario;
     private int estado;
     List<RegistroVisitaEntity> registrosVisitas;
 
@@ -62,6 +63,16 @@ public class PacienteEntity {
         this.carnet = carnet;
     }
 
+    @JoinColumn(name = "USUARIO_ID", referencedColumnName = "ID")
+    @ManyToOne()
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
+
     @Basic
     @Column(name = "ESTADO")
     public int getEstado() {
@@ -93,6 +104,7 @@ public class PacienteEntity {
         if (tipo != that.tipo) return false;
         if (estado != that.estado) return false;
         if (carnet != null ? !carnet.equals(that.carnet) : that.carnet != null) return false;
+        if (usuario != null ? !usuario.equals(that.usuario) : that.usuario != null) return false;
 
         return true;
     }
@@ -103,6 +115,7 @@ public class PacienteEntity {
         result = 31 * result + (persona != null ? persona.hashCode() : 0);
         result = 31 * result + (tipo != null ? tipo.hashCode() : 0);
         result = 31 * result + (carnet != null ? carnet.hashCode() : 0);
+        result = 31 * result + (usuario != null ? usuario.hashCode() : 0);
         result = 31 * result + estado;
         return result;
     }

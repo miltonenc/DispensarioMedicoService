@@ -12,6 +12,8 @@ public class MedicoRequest {
     private String dni;
     private Long especialidadId;
     private String tandaLabor;
+    private String usuario;
+    private String password;
     private int estado;
 
     public MedicoRequest() {
@@ -80,5 +82,21 @@ public class MedicoRequest {
 
     public void setEstado(int estado) {
         this.estado = estado;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
