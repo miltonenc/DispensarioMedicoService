@@ -53,7 +53,7 @@ public class UsuarioController {
         }
     }
 
-    @RequestMapping(value = ConstantesUtil.OBTENER_USUARIO, method = RequestMethod.POST, produces = ConstantesUtil.APPLICATION_JSON)
+    @RequestMapping(value = ConstantesUtil.OBTENER_USUARIO, method = RequestMethod.GET, produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
     public UsuarioResponse obtener(Long id) {
         try {
@@ -65,7 +65,7 @@ public class UsuarioController {
         }
     }
 
-    @RequestMapping(value = ConstantesUtil.LOGIN, method = RequestMethod.POST, produces = ConstantesUtil.APPLICATION_JSON)
+    @RequestMapping(value = ConstantesUtil.LOGIN, method = RequestMethod.GET, produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
     public UsuarioResponse login(String pUsuario, String pPassword) {
         try {

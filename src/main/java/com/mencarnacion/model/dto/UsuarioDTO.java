@@ -1,34 +1,48 @@
-package com.mencarnacion.model.entities;
+package com.mencarnacion.model.dto;
+
+import com.mencarnacion.model.entities.MedicoEntity;
+import com.mencarnacion.model.entities.PacienteEntity;
+import com.mencarnacion.model.entities.UsuarioRolEntity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "USUARIO", schema = "ISO715")
-public class UsuarioEntity {
+
+public class UsuarioDTO {
     private Long id;
     private String usuario;
     private String password;
     private int estado;
-    private List<UsuarioRolEntity> roles;
-    private List<PacienteEntity> pacientes;
-    private List<MedicoEntity> medicos;
+    private List<UsuarioRolDTO> roles;
 
-    public UsuarioEntity() {
-        super();
-        this.estado = 1;
-    }
-
-    public UsuarioEntity(String usuario, String password) {
+    public UsuarioDTO(String usuario, String password) {
         super();
         this.usuario = usuario;
         this.password = password;
         this.estado = 1;
     }
 
-    @Id
-    @Column(name = "ID")
+    public UsuarioDTO(Long id, String usuario, String password, List<UsuarioRolEntity> roles) {
+        super();
+        this.id = id;
+        this.usuario = usuario;
+        this.password = password;
+        this.estado = 1;
+        this.roles = convertRolEtityToDTO(roles);
+    }
+
+    private List<UsuarioRolDTO> convertRolEtityToDTO(List<UsuarioRolEntity> rolesEntity){
+        List<UsuarioRolDTO> usuarioRolDTOS = new ArrayList<>();
+
+        for (UsuarioRolEntity rolEntity : rolesEntity){
+            usuarioRolDTOS.add(new UsuarioRolDTO(rolEntity.getId(), rolEntity.getRol().getCodigo(), rolEntity.getRol().getDescripcion()));
+        }
+
+        return usuarioRolDTOS;
+    }
+
     public Long getId() {
         return id;
     }
@@ -37,8 +51,6 @@ public class UsuarioEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "USUARIO")
     public String getUsuario() {
         return usuario;
     }
@@ -47,8 +59,6 @@ public class UsuarioEntity {
         this.usuario = usuario;
     }
 
-    @Basic
-    @Column(name = "PASSWORD")
     public String getPassword() {
         return password;
     }
@@ -57,8 +67,6 @@ public class UsuarioEntity {
         this.password = password;
     }
 
-    @Basic
-    @Column(name = "ESTADO")
     public int getEstado() {
         return estado;
     }
@@ -67,50 +75,28 @@ public class UsuarioEntity {
         this.estado = estado;
     }
 
-    @OneToMany(mappedBy = "usuario")
-    public List<UsuarioRolEntity> getRoles() {
+    public List<UsuarioRolDTO> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<UsuarioRolEntity> roles) {
+    public void setRoles(List<UsuarioRolDTO> roles) {
         this.roles = roles;
-    }
-
-    @OneToMany(mappedBy = "usuario")
-    public List<PacienteEntity> getPacientes() {
-        return pacientes;
-    }
-
-    public void setPacientes(List<PacienteEntity> pacientes) {
-        this.pacientes = pacientes;
-    }
-
-
-    @OneToMany(mappedBy = "usuario")
-    public List<MedicoEntity> getMedicos() {
-        return medicos;
-    }
-
-    public void setMedicos(List<MedicoEntity> medicos) {
-        this.medicos = medicos;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UsuarioEntity that = (UsuarioEntity) o;
+        UsuarioDTO that = (UsuarioDTO) o;
         return estado == that.estado &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(usuario, that.usuario) &&
                 Objects.equals(password, that.password) &&
-                Objects.equals(roles, that.roles) &&
-                Objects.equals(pacientes, that.pacientes) &&
-                Objects.equals(medicos, that.medicos);
+                Objects.equals(roles, that.roles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, usuario, password, estado, roles, pacientes, medicos);
+        return Objects.hash(id, usuario, password, estado, roles);
     }
 }

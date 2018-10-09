@@ -30,7 +30,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         UsuarioEntity entity = UsuarioRepository.buscarPorId(id);
 
         if (Objects.nonNull(entity)) {
-            response.setUsuarioEntity(entity);
+            response.setUsuario(entity);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
@@ -45,7 +45,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         UsuarioEntity entity = UsuarioRepository.login(pUsuario, pPassword);
 
         if (Objects.nonNull(entity)) {
-            response.setUsuarioEntity(entity);
+            response.setUsuario(entity);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
@@ -60,7 +60,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         List<UsuarioEntity> entityList = UsuarioRepository.obtenerListado();
 
         if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
-            response.setUsuarioEntityList(entityList);
+            response.setUsuario(entityList);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
@@ -75,7 +75,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         List<UsuarioEntity> entityList = UsuarioRepository.obtenerListadoByUsuario(pUsuario);
 
         if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
-            response.setUsuarioEntityList(entityList);
+            response.setUsuario(entityList);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));

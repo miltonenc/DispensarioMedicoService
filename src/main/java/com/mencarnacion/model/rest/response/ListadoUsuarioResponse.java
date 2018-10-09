@@ -1,8 +1,12 @@
 package com.mencarnacion.model.rest.response;
 
+import com.mencarnacion.model.dto.UsuarioDTO;
 import com.mencarnacion.model.entities.UsuarioEntity;
+import com.mencarnacion.model.entities.UsuarioRolEntity;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by mencarnacion on 10/07/18.
@@ -10,7 +14,7 @@ import java.util.List;
 public class ListadoUsuarioResponse {
 
     private RespuestaType respuesta;
-    private List<UsuarioEntity> usuarioEntityList;
+    private List<UsuarioDTO> usuario;
 
     public ListadoUsuarioResponse() {
         super();
@@ -22,7 +26,7 @@ public class ListadoUsuarioResponse {
 
     public ListadoUsuarioResponse(RespuestaType respuesta, List<UsuarioEntity> usuarioEntityList) {
         this.respuesta = respuesta;
-        this.usuarioEntityList = usuarioEntityList;
+        setUsuario(usuarioEntityList);
     }
 
     public RespuestaType getRespuesta() {
@@ -33,11 +37,18 @@ public class ListadoUsuarioResponse {
         this.respuesta = respuesta;
     }
 
-    public List<UsuarioEntity> getUsuarioEntityList() {
-        return usuarioEntityList;
+    public List<UsuarioDTO> getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioEntityList(List<UsuarioEntity> usuarioEntityList) {
-        this.usuarioEntityList = usuarioEntityList;
+    public void setUsuario(List<UsuarioEntity> usuarioEntityList) {
+        List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
+        if (Objects.nonNull(usuarioEntityList)){
+            for (UsuarioEntity usuarioEntity :usuarioEntityList){
+                usuarioDTOS.add(new UsuarioDTO(usuarioEntity.getId(), usuarioEntity.getUsuario(), usuarioEntity.getPassword(), usuarioEntity.getRoles()));
+            }
+
+        }
+        this.usuario = usuarioDTOS;
     }
 }

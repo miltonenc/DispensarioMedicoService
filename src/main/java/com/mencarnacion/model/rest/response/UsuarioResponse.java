@@ -1,5 +1,6 @@
 package com.mencarnacion.model.rest.response;
 
+import com.mencarnacion.model.dto.UsuarioDTO;
 import com.mencarnacion.model.entities.UsuarioEntity;
 
 /**
@@ -8,7 +9,7 @@ import com.mencarnacion.model.entities.UsuarioEntity;
 public class UsuarioResponse {
 
     private RespuestaType respuesta;
-    private UsuarioEntity usuarioEntity;
+    private UsuarioDTO usuario;
 
     public UsuarioResponse() {
         super();
@@ -20,7 +21,7 @@ public class UsuarioResponse {
 
     public UsuarioResponse(RespuestaType respuesta, UsuarioEntity usuarioEntity) {
         this.respuesta = respuesta;
-        this.usuarioEntity = usuarioEntity;
+        setUsuario(usuarioEntity);
     }
 
     public RespuestaType getRespuesta() {
@@ -31,11 +32,11 @@ public class UsuarioResponse {
         this.respuesta = respuesta;
     }
 
-    public UsuarioEntity getUsuarioEntity() {
-        return usuarioEntity;
+    public UsuarioDTO getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
-        this.usuarioEntity = usuarioEntity;
+    public void setUsuario(UsuarioEntity usuarioEntity) {
+        this.usuario = new UsuarioDTO(usuarioEntity.getId(), usuarioEntity.getUsuario(), usuarioEntity.getPassword(), usuarioEntity.getRoles()) ;
     }
 }
