@@ -41,7 +41,7 @@ public class MedicamentoController {
         }
     }
 
-    @RequestMapping(value = ConstantesUtil.OBTENER_MEDICAMENTO, method = RequestMethod.POST, produces = ConstantesUtil.APPLICATION_JSON)
+    @RequestMapping(value = ConstantesUtil.OBTENER_MEDICAMENTO, method = RequestMethod.GET, produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
     public MedicamentoResponse obtener(Long id) {
         try {

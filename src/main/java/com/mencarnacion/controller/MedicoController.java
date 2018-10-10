@@ -41,7 +41,7 @@ public class MedicoController {
         }
     }
 
-    @RequestMapping(value = ConstantesUtil.OBTENER_MEDICO, method = RequestMethod.POST, produces = ConstantesUtil.APPLICATION_JSON)
+    @RequestMapping(value = ConstantesUtil.OBTENER_MEDICO, method = RequestMethod.GET, produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
     public MedicoResponse obtener(Long id) {
         try {

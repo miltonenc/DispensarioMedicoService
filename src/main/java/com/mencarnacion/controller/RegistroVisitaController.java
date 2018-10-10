@@ -41,7 +41,7 @@ public class RegistroVisitaController {
         }
     }
 
-    @RequestMapping(value = ConstantesUtil.OBTENER_REGISTRO_VISITA, method = RequestMethod.POST, produces = ConstantesUtil.APPLICATION_JSON)
+    @RequestMapping(value = ConstantesUtil.OBTENER_REGISTRO_VISITA, method = RequestMethod.GET, produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
     public RegistroVisitaResponse obtener(Long id) {
         try {

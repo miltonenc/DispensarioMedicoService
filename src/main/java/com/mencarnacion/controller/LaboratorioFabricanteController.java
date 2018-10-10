@@ -41,7 +41,7 @@ public class LaboratorioFabricanteController {
     }
 
     @RequestMapping(value = ConstantesUtil.OBTENER_LABORATORIO_FABICANTE,
-            method = RequestMethod.POST,
+            method = RequestMethod.GET,
             produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
     public LaboratorioFabricanteResponse obtener(@RequestBody Long id) {
