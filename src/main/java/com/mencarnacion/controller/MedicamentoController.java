@@ -10,10 +10,7 @@ import com.mencarnacion.util.TipoMensaje;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
@@ -55,7 +52,7 @@ public class MedicamentoController {
 
     @RequestMapping(value = ConstantesUtil.GUARDAR_MEDICAMENTO, method = RequestMethod.POST, produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
-    public MedicamentoResponse guardar(MedicamentoRequest request) {
+    public MedicamentoResponse guardar(@RequestBody MedicamentoRequest request) {
         try {
             return medicamentoService.guardar(request);
         } catch (Exception e) {

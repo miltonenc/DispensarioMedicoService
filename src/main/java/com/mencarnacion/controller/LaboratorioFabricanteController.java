@@ -44,7 +44,7 @@ public class LaboratorioFabricanteController {
             method = RequestMethod.GET,
             produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
-    public LaboratorioFabricanteResponse obtener(@RequestBody Long id) {
+    public LaboratorioFabricanteResponse obtener(Long id) {
         try {
             return laboratorioFabricanteService.buscarPorId(id);
         } catch (Exception e) {
@@ -58,9 +58,9 @@ public class LaboratorioFabricanteController {
             method = RequestMethod.POST,
             produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
-    public LaboratorioFabricanteResponse guardar(@RequestBody LaboratorioFabricanteRequest request) {
+    public LaboratorioFabricanteResponse guardar(@RequestBody LaboratorioFabricanteRequest laboratorio) {
         try {
-            return laboratorioFabricanteService.guardar(request);
+            return laboratorioFabricanteService.guardar(laboratorio);
         } catch (Exception e) {
             log.debug(ConstantesUtil.GUARDAR_LABORATORIO_FABICANTE);
             log.error(Arrays.toString(e.getStackTrace()));

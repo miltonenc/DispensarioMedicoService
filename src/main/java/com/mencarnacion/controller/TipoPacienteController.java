@@ -10,10 +10,7 @@ import com.mencarnacion.util.TipoMensaje;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
@@ -41,7 +38,7 @@ public class TipoPacienteController {
         }
     }
 
-    @RequestMapping(value = ConstantesUtil.OBTENER_TIPO_PACIENTE, method = RequestMethod.POST, produces = ConstantesUtil.APPLICATION_JSON)
+    @RequestMapping(value = ConstantesUtil.OBTENER_TIPO_PACIENTE, method = RequestMethod.GET, produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
     public TipoPacienteResponse obtener(Long id) {
         try {
@@ -55,7 +52,7 @@ public class TipoPacienteController {
 
     @RequestMapping(value = ConstantesUtil.GUARDAR_TIPO_PACIENTE, method = RequestMethod.POST, produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
-    public TipoPacienteResponse guardar(TipoPacienteRequest request) {
+    public TipoPacienteResponse guardar(@RequestBody TipoPacienteRequest request) {
         try {
             return tipoPacienteService.guardar(request);
         } catch (Exception e) {

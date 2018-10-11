@@ -10,10 +10,7 @@ import com.mencarnacion.util.TipoMensaje;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
@@ -41,7 +38,7 @@ public class TipoMedicamentoController {
         }
     }
 
-    @RequestMapping(value = ConstantesUtil.OBTENER_TIPO_MEDICAMENTOS, method = RequestMethod.POST, produces = ConstantesUtil.APPLICATION_JSON)
+    @RequestMapping(value = ConstantesUtil.OBTENER_TIPO_MEDICAMENTOS, method = RequestMethod.GET, produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
     public TipoMedicamentoResponse obtener(Long id) {
         try {
@@ -55,7 +52,7 @@ public class TipoMedicamentoController {
 
     @RequestMapping(value = ConstantesUtil.GUARDAR_TIPO_MEDICAMENTOS, method = RequestMethod.POST, produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
-    public TipoMedicamentoResponse guardar(TipoMedicamentoRequest request) {
+    public TipoMedicamentoResponse guardar(@RequestBody TipoMedicamentoRequest request) {
         try {
             return tipoMedicamentoService.guardar(request);
         } catch (Exception e) {

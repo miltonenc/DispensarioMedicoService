@@ -10,10 +10,13 @@ import java.util.List;
 @Table(name = "LABORATORIO_FABRICANTE", schema = "ISO715")
 public class LaboratorioFabricanteEntity {
 
+
     private Long id;
     private String nombre;
     private String descripcion;
     private int estado;
+
+    @Transient
     private List<MedicamentoEntity> medicamentos;
 
     public LaboratorioFabricanteEntity() {
@@ -23,6 +26,7 @@ public class LaboratorioFabricanteEntity {
 
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -77,18 +81,17 @@ public class LaboratorioFabricanteEntity {
 
         LaboratorioFabricanteEntity that = (LaboratorioFabricanteEntity) o;
 
-        if (id != that.id) return false;
         if (estado != that.estado) return false;
-        if (nombre != null ? !nombre.equals(that.nombre) : that.nombre != null) return false;
-        if (descripcion != null ? !descripcion.equals(that.descripcion) : that.descripcion != null) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (!nombre.equals(that.nombre)) return false;
+        return descripcion != null ? descripcion.equals(that.descripcion) : that.descripcion == null;
 
-        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + (nombre != null ? nombre.hashCode() : 0);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + nombre.hashCode();
         result = 31 * result + (descripcion != null ? descripcion.hashCode() : 0);
         result = 31 * result + estado;
         return result;
