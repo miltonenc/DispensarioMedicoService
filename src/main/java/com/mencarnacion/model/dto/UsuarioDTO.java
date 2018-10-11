@@ -14,23 +14,34 @@ public class UsuarioDTO {
     private Long id;
     private String usuario;
     private String password;
+    private Long personaId;
+    private String nombre;
+    private String apellido;
+    private String dni;
     private int estado;
     private List<UsuarioRolDTO> roles;
 
-    public UsuarioDTO(String usuario, String password) {
-        super();
-        this.usuario = usuario;
-        this.password = password;
-        this.estado = 1;
-    }
-
-    public UsuarioDTO(Long id, String usuario, String password, List<UsuarioRolEntity> roles) {
+    public UsuarioDTO(Long id, String usuario, String password, List<UsuarioRolEntity> roles, List<MedicoEntity> medicos, List<PacienteEntity> pacientes) {
         super();
         this.id = id;
         this.usuario = usuario;
         this.password = password;
         this.estado = 1;
         this.roles = convertRolEtityToDTO(roles);
+        if(Objects.nonNull(medicos) && !medicos.isEmpty()){
+            MedicoEntity medicoTmp = medicos.get(0);
+            this.personaId = medicoTmp.getPersona().getId();
+            this.nombre = medicoTmp.getPersona().getNombre();
+            this.apellido = medicoTmp.getPersona().getApellido();
+            this.dni = medicoTmp.getPersona().getDni();
+        }else if(Objects.nonNull(pacientes) && !pacientes.isEmpty()){
+            PacienteEntity pacienteTmp = pacientes.get(0);
+            this.personaId = pacienteTmp.getPersona().getId();
+            this.nombre = pacienteTmp.getPersona().getNombre();
+            this.apellido = pacienteTmp.getPersona().getApellido();
+            this.dni = pacienteTmp.getPersona().getDni();
+        }
+
     }
 
     private List<UsuarioRolDTO> convertRolEtityToDTO(List<UsuarioRolEntity> rolesEntity){
@@ -83,20 +94,68 @@ public class UsuarioDTO {
         this.roles = roles;
     }
 
+    public Long getPersonaId() {
+        return personaId;
+    }
+
+    public void setPersonaId(Long personaId) {
+        this.personaId = personaId;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         UsuarioDTO that = (UsuarioDTO) o;
-        return estado == that.estado &&
-                Objects.equals(id, that.id) &&
-                Objects.equals(usuario, that.usuario) &&
-                Objects.equals(password, that.password) &&
-                Objects.equals(roles, that.roles);
+
+        if (estado != that.estado) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (usuario != null ? !usuario.equals(that.usuario) : that.usuario != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (personaId != null ? !personaId.equals(that.personaId) : that.personaId != null) return false;
+        if (nombre != null ? !nombre.equals(that.nombre) : that.nombre != null) return false;
+        if (apellido != null ? !apellido.equals(that.apellido) : that.apellido != null) return false;
+        if (dni != null ? !dni.equals(that.dni) : that.dni != null) return false;
+        return roles != null ? roles.equals(that.roles) : that.roles == null;
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, usuario, password, estado, roles);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (usuario != null ? usuario.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (personaId != null ? personaId.hashCode() : 0);
+        result = 31 * result + (nombre != null ? nombre.hashCode() : 0);
+        result = 31 * result + (apellido != null ? apellido.hashCode() : 0);
+        result = 31 * result + (dni != null ? dni.hashCode() : 0);
+        result = 31 * result + estado;
+        result = 31 * result + (roles != null ? roles.hashCode() : 0);
+        return result;
     }
 }

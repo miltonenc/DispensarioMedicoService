@@ -45,7 +45,8 @@ public class ListadoUsuarioResponse {
         List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
         if (Objects.nonNull(usuarioEntityList)){
             for (UsuarioEntity usuarioEntity :usuarioEntityList){
-                usuarioDTOS.add(new UsuarioDTO(usuarioEntity.getId(), usuarioEntity.getUsuario(), usuarioEntity.getPassword(), usuarioEntity.getRoles()));
+                usuarioDTOS.add(new UsuarioDTO(usuarioEntity.getId(), usuarioEntity.getUsuario(),
+                        usuarioEntity.getPassword(), usuarioEntity.getRoles(), usuarioEntity.getMedicos(), usuarioEntity.getPacientes()));
             }
 
         }

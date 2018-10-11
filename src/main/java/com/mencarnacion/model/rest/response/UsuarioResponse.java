@@ -37,6 +37,7 @@ public class UsuarioResponse {
     }
 
     public void setUsuario(UsuarioEntity usuarioEntity) {
-        this.usuario = new UsuarioDTO(usuarioEntity.getId(), usuarioEntity.getUsuario(), usuarioEntity.getPassword(), usuarioEntity.getRoles()) ;
+        this.usuario = new UsuarioDTO(usuarioEntity.getId(), usuarioEntity.getUsuario(),
+                usuarioEntity.getPassword(), usuarioEntity.getRoles(), usuarioEntity.getMedicos(), usuarioEntity.getPacientes()) ;
     }
 }
