@@ -42,6 +42,16 @@ public class PacienteServiceImpl implements PacienteService {
     @Override
     public PacienteResponse guardar(PacienteRequest request) {
         PacienteResponse response = new PacienteResponse();
+
+        boolean isExisteRegistro = Objects.nonNull(request.getId()) ?
+                personaRepository.isExisteRegistroPorId(request.getDni().trim(), request.getId()) :
+                personaRepository.isExisteRegistro(request.getDni().trim());
+
+        if(isExisteRegistro){
+            response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
+            return response;
+        }
+
         PacienteEntity entity = pacienteRepository.buscarPorId(Objects.nonNull(request.getId()) ? request.getId() : null);
 
         if (Objects.nonNull(entity)) {

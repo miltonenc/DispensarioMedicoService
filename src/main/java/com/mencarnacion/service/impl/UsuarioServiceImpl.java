@@ -83,4 +83,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         return response;
     }
+
+    @Override
+    public boolean isExisteUsuario(String pUsuario) {
+       return UsuarioRepository.isExisteUsuario(pUsuario);
+    }
 }

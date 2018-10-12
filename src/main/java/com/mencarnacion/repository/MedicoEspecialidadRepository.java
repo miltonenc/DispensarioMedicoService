@@ -22,4 +22,17 @@ public interface MedicoEspecialidadRepository extends CrudRepository<MedicoEspec
     @Query("Select S FROM MedicoEspecialidadEntity S WHERE S.estado = 1 order by S.nombre asc")
     @Transactional(readOnly = true)
     List<MedicoEspecialidadEntity> obtenerListado();
+
+
+    @Query("select CASE WHEN (COUNT(S.id) > 0) THEN true  ELSE false END " +
+            " FROM MedicoEspecialidadEntity S WHERE UPPER(S.nombre) = UPPER(:pNombre)" +
+            " AND S.id != :pId AND S.estado = 1 ")
+    @Transactional(readOnly = true)
+    boolean isExisteRegistroPorId(@Param("pNombre") String pNombre, @Param("pId") Long pId);
+
+
+    @Query("Select CASE WHEN (COUNT(S.id) > 0) THEN true  ELSE false END " +
+            " FROM MedicoEspecialidadEntity S WHERE UPPER(S.nombre) = UPPER(:pNombre) AND S.estado = 1 ")
+    @Transactional(readOnly = true)
+    boolean isExisteRegistro(@Param("pNombre") String pNombre);
 }

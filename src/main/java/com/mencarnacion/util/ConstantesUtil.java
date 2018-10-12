@@ -58,5 +58,6 @@ public class ConstantesUtil implements Serializable {
     public static final String LISTADO_USUARIO_USUARIO = "/Usuario/ObtenerListadoPorUsuario";
     public static final String OBTENER_USUARIO = "/Usuario/Obtener";
     public static final String LOGIN = "/Usuario/Login";
+    public static final String VALIDAR_USUARIO = "/Usuario/ValidarExistencia";
 
 }

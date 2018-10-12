@@ -42,6 +42,16 @@ public class MedicoServiceImpl implements MedicoService {
     @Override
     public MedicoResponse guardar(MedicoRequest request) {
         MedicoResponse response = new MedicoResponse();
+
+        boolean isExisteRegistro = Objects.nonNull(request.getId()) ?
+                personaRepository.isExisteRegistroPorId(request.getDni().trim(), request.getId()) :
+                personaRepository.isExisteRegistro(request.getDni().trim());
+
+        if(isExisteRegistro){
+            response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
+            return response;
+        }
+
         MedicoEntity entity = medicoRepository.buscarPorId(Objects.nonNull(request.getId()) ? request.getId() : null);
 
         if (Objects.nonNull(entity)) {

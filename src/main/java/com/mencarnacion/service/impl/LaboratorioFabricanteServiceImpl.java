@@ -26,6 +26,16 @@ public class LaboratorioFabricanteServiceImpl implements LaboratorioFabricanteSe
     @Override
     public LaboratorioFabricanteResponse guardar(LaboratorioFabricanteRequest request) {
         LaboratorioFabricanteResponse response = new LaboratorioFabricanteResponse();
+
+        boolean isExisteRegistro = Objects.nonNull(request.getId()) ?
+                laboratorioFabricanteRepository.isExisteRegistroPorId(request.getNombre().trim(), request.getId()) :
+                laboratorioFabricanteRepository.isExisteRegistro(request.getNombre().trim());
+
+        if(isExisteRegistro){
+            response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
+            return response;
+        }
+
         LaboratorioFabricanteEntity entity = laboratorioFabricanteRepository.buscarPorId(Objects.nonNull(request.getId()) ? request.getId() : null);
 
         if (Objects.nonNull(entity)) {

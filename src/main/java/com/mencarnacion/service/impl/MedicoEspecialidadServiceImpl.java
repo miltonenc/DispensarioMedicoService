@@ -26,6 +26,16 @@ public class MedicoEspecialidadServiceImpl implements MedicoEspecialidadService 
     @Override
     public MedicoEspecialidadResponse guardar(MedicoEspecialidadRequest request) {
         MedicoEspecialidadResponse response = new MedicoEspecialidadResponse();
+
+        boolean isExisteRegistro = Objects.nonNull(request.getId()) ?
+                medicoEspecialidadRepository.isExisteRegistroPorId(request.getNombre().trim(), request.getId()) :
+                medicoEspecialidadRepository.isExisteRegistro(request.getNombre().trim());
+
+        if(isExisteRegistro){
+            response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
+            return response;
+        }
+
         MedicoEspecialidadEntity entity = medicoEspecialidadRepository.buscarPorId(Objects.nonNull(request.getId()) ? request.getId() : null);
 
         if (Objects.nonNull(entity)) {

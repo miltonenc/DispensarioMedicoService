@@ -30,6 +30,16 @@ public class TipoMedicamentoServiceImpl implements TipoMedicamentoService {
     @Override
     public TipoMedicamentoResponse guardar(TipoMedicamentoRequest request) {
         TipoMedicamentoResponse response = new TipoMedicamentoResponse();
+
+        boolean isExisteRegistro = Objects.nonNull(request.getId()) ?
+                tipoMedicamentoRepository.isExisteRegistroPorId(request.getNombre().trim(), request.getId()) :
+                tipoMedicamentoRepository.isExisteRegistro(request.getNombre().trim());
+
+        if(isExisteRegistro){
+            response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
+            return response;
+        }
+
         TipoMedicamentoEntity entity = tipoMedicamentoRepository.buscarPorId(Objects.nonNull(request.getId()) ? request.getId() : null);
 
         if (Objects.nonNull(entity)) {

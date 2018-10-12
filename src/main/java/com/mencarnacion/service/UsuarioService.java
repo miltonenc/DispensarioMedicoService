@@ -16,4 +16,6 @@ public interface UsuarioService {
     ListadoUsuarioResponse obtenerListado();
 
     ListadoUsuarioResponse obtenerListadoByUsuario(String pUsuario);
+
+    boolean isExisteUsuario(String pUsuario);
 }

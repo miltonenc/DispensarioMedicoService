@@ -31,4 +31,10 @@ public interface UsuarioRepository extends CrudRepository<UsuarioEntity, Long> {
     @Query("Select S FROM UsuarioEntity S WHERE UPPER(S.usuario) = UPPER(:usuario) and S.estado = 1 order by S.usuario asc")
     @Transactional(readOnly = true)
     List<UsuarioEntity> obtenerListadoByUsuario(@Param("usuario") String usuario);
+
+
+    @Query("Select CASE WHEN (COUNT(S.id) > 0) THEN true  ELSE false END " +
+            " FROM UsuarioEntity S WHERE UPPER(S.usuario) = UPPER(:pUsuario) AND S.estado = 1 ")
+    @Transactional(readOnly = true)
+    boolean isExisteUsuario(@Param("pUsuario") String pUsuario);
 }

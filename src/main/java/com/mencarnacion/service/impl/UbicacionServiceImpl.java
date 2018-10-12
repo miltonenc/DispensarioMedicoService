@@ -25,8 +25,18 @@ public class UbicacionServiceImpl implements UbicacionService {
 
     @Override
     public UbicacionResponse guardar(UbicacionRequest request) {
+       UbicacionResponse response = new UbicacionResponse();
+
+        boolean isExisteRegistro = Objects.nonNull(request.getId()) ?
+                ubicacionRepository.isExisteRegistroPorId(request.getId(), request.getEstante(), request.getTramo(), request.getCelda()) :
+                ubicacionRepository.isExisteRegistro(request.getEstante(), request.getTramo(), request.getCelda());
+
+        if(isExisteRegistro){
+            response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
+            return response;
+        }
+
         final String TMP_CODIGO = "E" + request.getEstante() + "T" + request.getTramo() + "C" + request.getCelda();
-        UbicacionResponse response = new UbicacionResponse();
         UbicacionEntity entity = ubicacionRepository.buscarPorId(Objects.nonNull(request.getId()) ? request.getId() : null);
 
         if (Objects.nonNull(entity)) {

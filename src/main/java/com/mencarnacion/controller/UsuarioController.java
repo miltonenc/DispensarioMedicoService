@@ -76,4 +76,10 @@ public class UsuarioController {
             return new UsuarioResponse(new RespuestaType(TipoMensaje.ERROR_INTERNO_SERVICIO));
         }
     }
+
+    @RequestMapping(value = ConstantesUtil.VALIDAR_USUARIO, method = RequestMethod.GET, produces = ConstantesUtil.APPLICATION_JSON)
+    @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
+    public boolean isExisteUsuario(String pUsuario) {
+        return usuarioService.isExisteUsuario(pUsuario);
+    }
 }

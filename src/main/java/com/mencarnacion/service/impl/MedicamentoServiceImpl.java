@@ -38,6 +38,16 @@ public class MedicamentoServiceImpl implements MedicamentoService {
     @Override
     public MedicamentoResponse guardar(MedicamentoRequest request) {
         MedicamentoResponse response = new MedicamentoResponse();
+
+        boolean isExisteRegistro = Objects.nonNull(request.getId()) ?
+                medicamentoRepository.isExisteRegistroPorId(request.getNombre().trim(), request.getId()) :
+                medicamentoRepository.isExisteRegistro(request.getNombre().trim());
+
+        if(isExisteRegistro){
+            response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
+            return response;
+        }
+
         MedicamentoEntity entity = medicamentoRepository.buscarPorId(Objects.nonNull(request.getId()) ? request.getId() : null);
 
         if (Objects.nonNull(entity)) {

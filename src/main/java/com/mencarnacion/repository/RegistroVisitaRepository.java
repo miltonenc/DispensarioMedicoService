@@ -19,6 +19,7 @@ public interface RegistroVisitaRepository extends CrudRepository<RegistroVisitaE
     @Transactional(readOnly = true)
     RegistroVisitaEntity buscarPorId(@Param("id") Long id);
 
+
     @Query("Select S FROM RegistroVisitaEntity S WHERE S.estado = 1 order by S.fecha desc")
     @Transactional(readOnly = true)
     List<RegistroVisitaEntity> obtenerListado();
