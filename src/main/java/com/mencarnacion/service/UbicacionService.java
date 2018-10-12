@@ -17,4 +17,8 @@ public interface UbicacionService {
     UbicacionResponse buscarPorCodigo(String pCodigo);
 
     ListadoUbicacionResponse obtenerListado();
+
+    ListadoUbicacionResponse obtenerListadoLibres();
+
+    ListadoUbicacionResponse obtenerListadoOcupadas();
 }

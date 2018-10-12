@@ -122,4 +122,34 @@ public class UbicacionServiceImpl implements UbicacionService {
 
         return response;
     }
+
+    @Override
+    public ListadoUbicacionResponse obtenerListadoLibres() {
+        ListadoUbicacionResponse response = new ListadoUbicacionResponse();
+        List<UbicacionEntity> entityList = ubicacionRepository.obtenerListadoLibres();
+
+        if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
+            response.setUbicacionEntityList(entityList);
+            response.setRespuesta(new RespuestaType(TipoMensaje.OK));
+        } else {
+            response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
+        }
+
+        return response;
+    }
+
+    @Override
+    public ListadoUbicacionResponse obtenerListadoOcupadas() {
+        ListadoUbicacionResponse response = new ListadoUbicacionResponse();
+        List<UbicacionEntity> entityList = ubicacionRepository.obtenerListadoOcupadas();
+
+        if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
+            response.setUbicacionEntityList(entityList);
+            response.setRespuesta(new RespuestaType(TipoMensaje.OK));
+        } else {
+            response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
+        }
+
+        return response;
+    }
 }

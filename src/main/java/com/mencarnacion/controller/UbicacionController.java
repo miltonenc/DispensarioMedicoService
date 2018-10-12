@@ -26,6 +26,30 @@ public class UbicacionController {
     @Autowired
     public UbicacionService ubicacionService;
 
+    @RequestMapping(value = ConstantesUtil.LISTADO_LIBRES, method = RequestMethod.GET, produces = ConstantesUtil.APPLICATION_JSON)
+    @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
+    public ListadoUbicacionResponse obtenerListadoLibres() {
+        try {
+            return ubicacionService.obtenerListadoLibres();
+        } catch (Exception e) {
+            log.debug(ConstantesUtil.LISTADO_LIBRES);
+            log.error(Arrays.toString(e.getStackTrace()));
+            return new ListadoUbicacionResponse(new RespuestaType(TipoMensaje.ERROR_INTERNO_SERVICIO));
+        }
+    }
+
+    @RequestMapping(value = ConstantesUtil.LISTADO_OCUPADAS, method = RequestMethod.GET, produces = ConstantesUtil.APPLICATION_JSON)
+    @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
+    public ListadoUbicacionResponse obtenerListadoOcupadas() {
+        try {
+            return ubicacionService.obtenerListadoOcupadas();
+        } catch (Exception e) {
+            log.debug(ConstantesUtil.LISTADO_OCUPADAS);
+            log.error(Arrays.toString(e.getStackTrace()));
+            return new ListadoUbicacionResponse(new RespuestaType(TipoMensaje.ERROR_INTERNO_SERVICIO));
+        }
+    }
+
     @RequestMapping(value = ConstantesUtil.LISTADO_UBICACION, method = RequestMethod.GET, produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
     public ListadoUbicacionResponse obtenerListado() {

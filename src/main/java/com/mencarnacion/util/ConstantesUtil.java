@@ -50,6 +50,8 @@ public class ConstantesUtil implements Serializable {
     public static final String GUARDAR_LABORATORIO_FABICANTE = "/LaboratorioFabricante/Guardar";
 
     public static final String LISTADO_UBICACION = "/Ubicacion/ObtenerListado";
+    public static final String LISTADO_LIBRES = "/Ubicacion/ObtenerLibres";
+    public static final String LISTADO_OCUPADAS = "/Ubicacion/ObtenerOcupadas";
     public static final String OBTENER_UBICACION = "/Ubicacion/Obtener";
     public static final String OBTENER_UBICACION_CODIGO = "/Ubicacion/ObtenerPorCodigo";
     public static final String GUARDAR_UBICACION = "/Ubicacion/Guardar";

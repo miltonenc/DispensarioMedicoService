@@ -30,6 +30,18 @@ public interface UbicacionRepository extends CrudRepository<UbicacionEntity, Lon
     List<UbicacionEntity> obtenerListado();
 
 
+    @Query("Select S FROM UbicacionEntity S WHERE S.estado = 1 and " +
+            " S.id not in (Select m FROM MedicamentoEntity m WHERE m.estado = 1 and m.ubicacion.id != null ) order by S.codigo asc")
+    @Transactional(readOnly = true)
+    List<UbicacionEntity> obtenerListadoLibres();
+
+
+    @Query("Select S FROM UbicacionEntity S WHERE S.estado = 1 and " +
+            " S.id in (Select m FROM MedicamentoEntity m WHERE m.estado = 1 and m.ubicacion.id != null ) order by S.codigo asc")
+    @Transactional(readOnly = true)
+    List<UbicacionEntity> obtenerListadoOcupadas();
+
+
     @Query("select CASE WHEN (COUNT(S.id) > 0) THEN true  ELSE false END " +
             " FROM UbicacionEntity S WHERE S.estante = :pEstante AND S.tramo = :pTramo AND S.celda = :pCelda " +
             " AND S.id != :pId AND S.estado = 1 ")
