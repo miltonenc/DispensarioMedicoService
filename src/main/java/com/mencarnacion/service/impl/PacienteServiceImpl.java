@@ -42,9 +42,10 @@ public class PacienteServiceImpl implements PacienteService {
     @Override
     public PacienteResponse guardar(PacienteRequest request) {
         PacienteResponse response = new PacienteResponse();
+        PacienteEntity entity = pacienteRepository.buscarPorId(Objects.nonNull(request.getId()) ? request.getId() : null);
 
-        boolean isExisteRegistro = Objects.nonNull(request.getId()) ?
-                personaRepository.isExisteRegistroPorId(request.getDni().trim(), request.getId()) :
+        boolean isExisteRegistro = (Objects.nonNull(entity) && Objects.nonNull(entity.getPersona().getId())) ?
+                personaRepository.isExisteRegistroPorId(request.getDni().trim(), entity.getPersona().getId()) :
                 personaRepository.isExisteRegistro(request.getDni().trim());
 
         if(isExisteRegistro){
@@ -52,7 +53,6 @@ public class PacienteServiceImpl implements PacienteService {
             return response;
         }
 
-        PacienteEntity entity = pacienteRepository.buscarPorId(Objects.nonNull(request.getId()) ? request.getId() : null);
 
         if (Objects.nonNull(entity)) {
             entity.getPersona().setNombre(request.getNombre());
@@ -64,7 +64,7 @@ public class PacienteServiceImpl implements PacienteService {
             entity = pacienteRepository.save(entity);
 
             if (Objects.nonNull(entity.getId())) {
-                response.setPacienteEntity(entity);
+                response.setPaciente(entity);
                 response.setRespuesta(new RespuestaType(TipoMensaje.OK));
             } else {
                 response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_ACTUALIZANDO_DATOS));
@@ -76,6 +76,7 @@ public class PacienteServiceImpl implements PacienteService {
             UsuarioEntity usuarioEntity = new UsuarioEntity(request.getUsuario().trim(), request.getPassword().trim());
             RolEntity rolEntity = rolRepository.buscarPorId(obtenerRolByTipoPaciente(request.getTipoId()));
             UsuarioRolEntity usuarioRolEntity = new UsuarioRolEntity(usuarioEntity, rolEntity);
+            entity.setUsuario(usuarioEntity);
             entity.setPersona(personaEntity);
             entity.getPersona().setNombre(request.getNombre());
             entity.getPersona().setApellido(request.getApellido());
@@ -91,7 +92,7 @@ public class PacienteServiceImpl implements PacienteService {
                 entity = pacienteRepository.save(entity);
 
                 if (Objects.nonNull(entity.getId())) {
-                    response.setPacienteEntity(entity);
+                    response.setPaciente(entity);
                     response.setRespuesta(new RespuestaType(TipoMensaje.OK));
                 } else {
                     response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_INSERTANDO_DATOS));
@@ -120,7 +121,7 @@ public class PacienteServiceImpl implements PacienteService {
         PacienteEntity entity = pacienteRepository.buscarPorId(id);
 
         if (Objects.nonNull(entity)) {
-            response.setPacienteEntity(entity);
+            response.setPaciente(entity);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
@@ -135,7 +136,7 @@ public class PacienteServiceImpl implements PacienteService {
         List<PacienteEntity> entityList = pacienteRepository.obtenerListado();
 
         if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
-            response.setPacienteEntityList(entityList);
+            response.setPacientes(entityList);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));

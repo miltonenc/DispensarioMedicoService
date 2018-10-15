@@ -10,7 +10,7 @@ import java.util.List;
 public class ListadoPacienteResponse {
 
     private RespuestaType respuesta;
-    private List<PacienteEntity> pacienteEntityList;
+    private List<PacienteEntity> pacientes;
 
     public ListadoPacienteResponse() {
         super();
@@ -22,7 +22,7 @@ public class ListadoPacienteResponse {
 
     public ListadoPacienteResponse(RespuestaType respuesta, List<PacienteEntity> pacienteEntityList) {
         this.respuesta = respuesta;
-        this.pacienteEntityList = pacienteEntityList;
+        this.pacientes = pacienteEntityList;
     }
 
     public RespuestaType getRespuesta() {
@@ -33,11 +33,22 @@ public class ListadoPacienteResponse {
         this.respuesta = respuesta;
     }
 
-    public List<PacienteEntity> getPacienteEntityList() {
-        return pacienteEntityList;
+    public List<PacienteEntity> getPacientes() {
+        return pacientes;
     }
 
-    public void setPacienteEntityList(List<PacienteEntity> pacienteEntityList) {
-        this.pacienteEntityList = pacienteEntityList;
+    public void setPacientes(List<PacienteEntity> pacientes) {
+
+        for(PacienteEntity paciente : pacientes){
+            paciente.getPersona().setMedicos(null);
+            paciente.getPersona().setPacientes(null);
+            paciente.getTipo().setPacientes(null);
+            paciente.setRegistrosVisitas(null);
+            paciente.getUsuario().setPacientes(null);
+            paciente.getUsuario().setMedicos(null);
+            paciente.getUsuario().setRoles(null);
+        }
+
+        this.pacientes = pacientes;
     }
 }

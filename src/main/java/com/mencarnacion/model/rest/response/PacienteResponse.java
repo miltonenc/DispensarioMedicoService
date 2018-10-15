@@ -8,7 +8,7 @@ import com.mencarnacion.model.entities.PacienteEntity;
 public class PacienteResponse {
 
     private RespuestaType respuesta;
-    private PacienteEntity pacienteEntity;
+    private PacienteEntity paciente;
 
     public PacienteResponse() {
         super();
@@ -20,7 +20,7 @@ public class PacienteResponse {
 
     public PacienteResponse(RespuestaType respuesta, PacienteEntity pacienteEntity) {
         this.respuesta = respuesta;
-        this.pacienteEntity = pacienteEntity;
+        this.paciente = pacienteEntity;
     }
 
     public RespuestaType getRespuesta() {
@@ -31,11 +31,18 @@ public class PacienteResponse {
         this.respuesta = respuesta;
     }
 
-    public PacienteEntity getPacienteEntity() {
-        return pacienteEntity;
+    public PacienteEntity getPaciente() {
+        return paciente;
     }
 
-    public void setPacienteEntity(PacienteEntity pacienteEntity) {
-        this.pacienteEntity = pacienteEntity;
+    public void setPaciente(PacienteEntity paciente) {
+        paciente.getPersona().setMedicos(null);
+        paciente.getPersona().setPacientes(null);
+        paciente.getTipo().setPacientes(null);
+        paciente.setRegistrosVisitas(null);
+        paciente.getUsuario().setPacientes(null);
+        paciente.getUsuario().setMedicos(null);
+        paciente.getUsuario().setRoles(null);
+        this.paciente = paciente;
     }
 }
