@@ -10,7 +10,7 @@ import java.util.List;
 public class ListadoMedicoResponse {
 
     private RespuestaType respuesta;
-    private List<MedicoEntity> medicoEntityList;
+    private List<MedicoEntity> medicos;
 
     public ListadoMedicoResponse() {
         super();
@@ -22,7 +22,7 @@ public class ListadoMedicoResponse {
 
     public ListadoMedicoResponse(RespuestaType respuesta, List<MedicoEntity> medicoEntityList) {
         this.respuesta = respuesta;
-        this.medicoEntityList = medicoEntityList;
+        this.medicos = medicoEntityList;
     }
 
     public RespuestaType getRespuesta() {
@@ -33,11 +33,20 @@ public class ListadoMedicoResponse {
         this.respuesta = respuesta;
     }
 
-    public List<MedicoEntity> getMedicoEntityList() {
-        return medicoEntityList;
+    public List<MedicoEntity> getMedicos() {
+        return medicos;
     }
 
-    public void setMedicoEntityList(List<MedicoEntity> medicoEntityList) {
-        this.medicoEntityList = medicoEntityList;
+    public void setMedicos(List<MedicoEntity> medicos) {
+        for(MedicoEntity medicoEntity : medicos){
+            medicoEntity.getPersona().setMedicos(null);
+            medicoEntity.getPersona().setPacientes(null);
+            medicoEntity.getEspecialidad().setMedicos(null);
+            medicoEntity.setRegistrosVisitas(null);
+            medicoEntity.getUsuario().setPacientes(null);
+            medicoEntity.getUsuario().setMedicos(null);
+            medicoEntity.getUsuario().setRoles(null);
+        }
+        this.medicos = medicos;
     }
 }

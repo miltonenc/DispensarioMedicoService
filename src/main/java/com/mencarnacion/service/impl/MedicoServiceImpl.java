@@ -69,7 +69,7 @@ public class MedicoServiceImpl implements MedicoService {
             entity = medicoRepository.save(entity);
 
             if (Objects.nonNull(entity.getId())) {
-                response.setMedicoEntity(entity);
+                response.setMedico(entity);
                 response.setRespuesta(new RespuestaType(TipoMensaje.OK));
             } else {
                 response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_ACTUALIZANDO_DATOS));
@@ -98,7 +98,7 @@ public class MedicoServiceImpl implements MedicoService {
                 entity = medicoRepository.save(entity);
 
                 if (Objects.nonNull(entity.getId())) {
-                    response.setMedicoEntity(entity);
+                    response.setMedico(entity);
                     response.setRespuesta(new RespuestaType(TipoMensaje.OK));
                 } else {
                     response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_INSERTANDO_DATOS));
@@ -118,7 +118,7 @@ public class MedicoServiceImpl implements MedicoService {
         MedicoEntity entity = medicoRepository.buscarPorId(id);
 
         if (Objects.nonNull(entity)) {
-            response.setMedicoEntity(entity);
+            response.setMedico(entity);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
@@ -133,7 +133,7 @@ public class MedicoServiceImpl implements MedicoService {
         List<MedicoEntity> entityList = medicoRepository.obtenerListado();
 
         if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
-            response.setMedicoEntityList(entityList);
+            response.setMedicos(entityList);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
