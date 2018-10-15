@@ -8,7 +8,7 @@ import com.mencarnacion.model.entities.MedicoEspecialidadEntity;
 public class MedicoEspecialidadResponse {
 
     private RespuestaType respuesta;
-    private MedicoEspecialidadEntity medicoEspecialidadEntity;
+    private MedicoEspecialidadEntity especialidad;
 
     public MedicoEspecialidadResponse() {
         super();
@@ -20,7 +20,7 @@ public class MedicoEspecialidadResponse {
 
     public MedicoEspecialidadResponse(RespuestaType respuesta, MedicoEspecialidadEntity medicoEspecialidadEntity) {
         this.respuesta = respuesta;
-        this.medicoEspecialidadEntity = medicoEspecialidadEntity;
+        this.especialidad = medicoEspecialidadEntity;
     }
 
     public RespuestaType getRespuesta() {
@@ -31,11 +31,11 @@ public class MedicoEspecialidadResponse {
         this.respuesta = respuesta;
     }
 
-    public MedicoEspecialidadEntity getMedicoEspecialidadEntity() {
-        return medicoEspecialidadEntity;
+    public MedicoEspecialidadEntity getEspecialidad() {
+        return especialidad;
     }
 
-    public void setMedicoEspecialidadEntity(MedicoEspecialidadEntity medicoEspecialidadEntity) {
-        this.medicoEspecialidadEntity = medicoEspecialidadEntity;
+    public void setEspecialidad(MedicoEspecialidadEntity especialidad) {
+        this.especialidad = especialidad;
     }
 }

@@ -45,7 +45,7 @@ public class MedicoEspecialidadServiceImpl implements MedicoEspecialidadService 
             entity = medicoEspecialidadRepository.save(entity);
 
             if (Objects.nonNull(entity.getId())) {
-                response.setMedicoEspecialidadEntity(entity);
+                response.setEspecialidad(entity);
                 response.setRespuesta(new RespuestaType(TipoMensaje.OK));
             } else {
                 response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_ACTUALIZANDO_DATOS));
@@ -58,7 +58,7 @@ public class MedicoEspecialidadServiceImpl implements MedicoEspecialidadService 
             entity = medicoEspecialidadRepository.save(entity);
 
             if (Objects.nonNull(entity.getId())) {
-                response.setMedicoEspecialidadEntity(entity);
+                response.setEspecialidad(entity);
                 response.setRespuesta(new RespuestaType(TipoMensaje.OK));
             } else {
                 response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_INSERTANDO_DATOS));
@@ -74,7 +74,7 @@ public class MedicoEspecialidadServiceImpl implements MedicoEspecialidadService 
         MedicoEspecialidadEntity entity = medicoEspecialidadRepository.buscarPorId(id);
 
         if (Objects.nonNull(entity)) {
-            response.setMedicoEspecialidadEntity(entity);
+            response.setEspecialidad(entity);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
@@ -89,7 +89,7 @@ public class MedicoEspecialidadServiceImpl implements MedicoEspecialidadService 
         List<MedicoEspecialidadEntity> entityList = medicoEspecialidadRepository.obtenerListado();
 
         if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
-            response.setMedicoEspecialidadEntityList(entityList);
+            response.setEspecialidades(entityList);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));

@@ -43,21 +43,26 @@ public class MedicoServiceImpl implements MedicoService {
     public MedicoResponse guardar(MedicoRequest request) {
         MedicoResponse response = new MedicoResponse();
 
-        boolean isExisteRegistro = Objects.nonNull(request.getId()) ?
-                personaRepository.isExisteRegistroPorId(request.getDni().trim(), request.getId()) :
-                personaRepository.isExisteRegistro(request.getDni().trim());
+        MedicoEntity entity = medicoRepository.buscarPorId(Objects.nonNull(request.getId()) ? request.getId() : null);
+
+        boolean isExisteRegistro;
+        if(Objects.nonNull(entity) && Objects.nonNull(entity.getPersona().getId())){
+            isExisteRegistro =  personaRepository.isExisteRegistroPorId(request.getDni().trim(), entity.getPersona().getId());
+        }else{
+            isExisteRegistro = personaRepository.isExisteRegistro(request.getDni().trim());
+        }
 
         if(isExisteRegistro){
             response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
             return response;
         }
 
-        MedicoEntity entity = medicoRepository.buscarPorId(Objects.nonNull(request.getId()) ? request.getId() : null);
 
         if (Objects.nonNull(entity)) {
             entity.getPersona().setNombre(request.getNombre());
             entity.getPersona().setApellido(request.getApellido());
             entity.getPersona().setDni(request.getDni());
+            entity.setTandaLabor(request.getTandaLabor());
             entity.setEspecialidad(medicoEspecialidadRepository.buscarPorId(request.getEspecialidadId()));
             entity.setEstado(request.getEstado());
 
@@ -81,6 +86,7 @@ public class MedicoServiceImpl implements MedicoService {
             entity.getPersona().setNombre(request.getNombre());
             entity.getPersona().setApellido(request.getApellido());
             entity.getPersona().setDni(request.getDni());
+            entity.setTandaLabor(request.getTandaLabor());
             entity.setEspecialidad(medicoEspecialidadRepository.buscarPorId(request.getEspecialidadId()));
 
             usuarioEntity = usuarioRepository.save(usuarioEntity);

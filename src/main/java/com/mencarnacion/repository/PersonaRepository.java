@@ -25,7 +25,7 @@ public interface PersonaRepository extends CrudRepository<PersonaEntity, Long> {
 
 
     @Query("select CASE WHEN (COUNT(S.id) > 0) THEN true  ELSE false END " +
-            " FROM PersonaEntity S WHERE S.dni = :pDNI" +
+            " FROM PersonaEntity S WHERE S.dni = :pDNI " +
             " AND S.id != :pId AND S.estado = 1 ")
     @Transactional(readOnly = true)
     boolean isExisteRegistroPorId(@Param("pDNI") String pDNI, @Param("pId") Long pId);
