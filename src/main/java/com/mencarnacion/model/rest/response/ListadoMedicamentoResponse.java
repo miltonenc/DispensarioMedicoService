@@ -1,7 +1,9 @@
 package com.mencarnacion.model.rest.response;
 
+import com.mencarnacion.model.dto.MedicamentoDTO;
 import com.mencarnacion.model.entities.MedicamentoEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +12,7 @@ import java.util.List;
 public class ListadoMedicamentoResponse {
 
     private RespuestaType respuesta;
-    private List<MedicamentoEntity> medicamentoEntityList;
+    private List<MedicamentoDTO> medicamentos;
 
     public ListadoMedicamentoResponse() {
         super();
@@ -20,9 +22,9 @@ public class ListadoMedicamentoResponse {
         this.respuesta = respuesta;
     }
 
-    public ListadoMedicamentoResponse(RespuestaType respuesta, List<MedicamentoEntity> tipoPacienteEntityList) {
+    public ListadoMedicamentoResponse(RespuestaType respuesta, List<MedicamentoDTO> tipoPacienteEntityList) {
         this.respuesta = respuesta;
-        this.medicamentoEntityList = tipoPacienteEntityList;
+        this.medicamentos = tipoPacienteEntityList;
     }
 
     public RespuestaType getRespuesta() {
@@ -33,11 +35,20 @@ public class ListadoMedicamentoResponse {
         this.respuesta = respuesta;
     }
 
-    public List<MedicamentoEntity> getMedicamentoEntityList() {
-        return medicamentoEntityList;
+    public List<MedicamentoDTO> getMedicamentos() {
+        return medicamentos;
     }
 
-    public void setMedicamentoEntityList(List<MedicamentoEntity> tipoPacienteEntityList) {
-        this.medicamentoEntityList = tipoPacienteEntityList;
+    public void setMedicamentos(List<MedicamentoDTO> tipoPacienteEntityList) {
+        this.medicamentos = tipoPacienteEntityList;
+    }
+
+    public List<MedicamentoDTO> convertEntityToDTO(List<MedicamentoEntity> medicamentoEntities){
+        List<MedicamentoDTO> medicamentoTmp = new ArrayList<>();
+        for(MedicamentoEntity medicamentoEntity : medicamentoEntities){
+            medicamentoTmp.add(new MedicamentoDTO(medicamentoEntity));
+        }
+
+        return medicamentoTmp;
     }
 }

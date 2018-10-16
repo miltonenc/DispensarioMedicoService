@@ -1,6 +1,6 @@
 package com.mencarnacion.model.rest.response;
 
-import com.mencarnacion.model.entities.MedicamentoEntity;
+import com.mencarnacion.model.dto.MedicamentoDTO;
 
 /**
  * Created by mencarnacion on 9/4/18.
@@ -8,7 +8,7 @@ import com.mencarnacion.model.entities.MedicamentoEntity;
 public class MedicamentoResponse {
 
     private RespuestaType respuesta;
-    private MedicamentoEntity medicamentoEntity;
+    private MedicamentoDTO medicamento;
 
     public MedicamentoResponse() {
         super();
@@ -18,9 +18,9 @@ public class MedicamentoResponse {
         this.respuesta = respuesta;
     }
 
-    public MedicamentoResponse(RespuestaType respuesta, MedicamentoEntity tipoPacienteEntity) {
+    public MedicamentoResponse(RespuestaType respuesta, MedicamentoDTO tipoPacienteEntity) {
         this.respuesta = respuesta;
-        this.medicamentoEntity = tipoPacienteEntity;
+        this.medicamento = tipoPacienteEntity;
     }
 
     public RespuestaType getRespuesta() {
@@ -31,11 +31,11 @@ public class MedicamentoResponse {
         this.respuesta = respuesta;
     }
 
-    public MedicamentoEntity getMedicamentoEntity() {
-        return medicamentoEntity;
+    public MedicamentoDTO getMedicamento() {
+        return medicamento;
     }
 
-    public void setMedicamentoEntity(MedicamentoEntity tipoPacienteEntity) {
-        this.medicamentoEntity = tipoPacienteEntity;
+    public void setMedicamento(MedicamentoDTO tipoPacienteEntity) {
+        this.medicamento = tipoPacienteEntity;
     }
 }

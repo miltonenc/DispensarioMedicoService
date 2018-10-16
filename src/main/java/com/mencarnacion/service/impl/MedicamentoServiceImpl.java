@@ -1,5 +1,6 @@
 package com.mencarnacion.service.impl;
 
+import com.mencarnacion.model.dto.MedicamentoDTO;
 import com.mencarnacion.model.entities.MedicamentoEntity;
 import com.mencarnacion.model.rest.request.MedicamentoRequest;
 import com.mencarnacion.model.rest.response.ListadoMedicamentoResponse;
@@ -62,7 +63,7 @@ public class MedicamentoServiceImpl implements MedicamentoService {
             entity = medicamentoRepository.save(entity);
 
             if (Objects.nonNull(entity.getId())) {
-                response.setMedicamentoEntity(entity);
+                response.setMedicamento(new MedicamentoDTO(entity));
                 response.setRespuesta(new RespuestaType(TipoMensaje.OK));
             } else {
                 response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_ACTUALIZANDO_DATOS));
@@ -80,7 +81,7 @@ public class MedicamentoServiceImpl implements MedicamentoService {
             entity = medicamentoRepository.save(entity);
 
             if (Objects.nonNull(entity.getId())) {
-                response.setMedicamentoEntity(entity);
+                response.setMedicamento(new MedicamentoDTO(entity));
                 response.setRespuesta(new RespuestaType(TipoMensaje.OK));
             } else {
                 response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_INSERTANDO_DATOS));
@@ -96,7 +97,7 @@ public class MedicamentoServiceImpl implements MedicamentoService {
         MedicamentoEntity entity = medicamentoRepository.buscarPorId(id);
 
         if (Objects.nonNull(entity)) {
-            response.setMedicamentoEntity(entity);
+            response.setMedicamento(new MedicamentoDTO(entity));
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
@@ -111,7 +112,7 @@ public class MedicamentoServiceImpl implements MedicamentoService {
         List<MedicamentoEntity> entityList = medicamentoRepository.obtenerListado();
 
         if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
-            response.setMedicamentoEntityList(entityList);
+            response.setMedicamentos(response.convertEntityToDTO(entityList));
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
