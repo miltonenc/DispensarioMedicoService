@@ -20,7 +20,22 @@ public interface RegistroVisitaRepository extends CrudRepository<RegistroVisitaE
     RegistroVisitaEntity buscarPorId(@Param("id") Long id);
 
 
+
     @Query("Select S FROM RegistroVisitaEntity S WHERE S.estado = 1 order by S.fecha desc")
     @Transactional(readOnly = true)
     List<RegistroVisitaEntity> obtenerListado();
+
+
+
+    @Query("Select S FROM RegistroVisitaEntity S WHERE S.estado = 1 " +
+            " and S.paciente.id = :pacienteId order by S.fecha desc")
+    @Transactional(readOnly = true)
+    List<RegistroVisitaEntity> obtenerListadoPorPaciente(@Param("pacienteId") Long pacienteId);
+
+
+
+    @Query("Select S FROM RegistroVisitaEntity S WHERE S.estado = 1 " +
+            " and S.medico.id = :medicoId order by S.fecha desc")
+    @Transactional(readOnly = true)
+    List<RegistroVisitaEntity> obtenerListadoPorMedico(@Param("medicoId") Long medicoId);
 }

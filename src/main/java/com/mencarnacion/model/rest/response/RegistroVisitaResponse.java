@@ -1,6 +1,6 @@
 package com.mencarnacion.model.rest.response;
 
-import com.mencarnacion.model.entities.RegistroVisitaEntity;
+import com.mencarnacion.model.dto.RegistroVisitaDTO;
 
 /**
  * Created by mencarnacion on 9/4/18.
@@ -8,7 +8,7 @@ import com.mencarnacion.model.entities.RegistroVisitaEntity;
 public class RegistroVisitaResponse {
 
     private RespuestaType respuesta;
-    private RegistroVisitaEntity registroVisitaEntity;
+    private RegistroVisitaDTO registroVisita;
 
     public RegistroVisitaResponse() {
         super();
@@ -18,9 +18,9 @@ public class RegistroVisitaResponse {
         this.respuesta = respuesta;
     }
 
-    public RegistroVisitaResponse(RespuestaType respuesta, RegistroVisitaEntity registroVisitaEntity) {
+    public RegistroVisitaResponse(RespuestaType respuesta, RegistroVisitaDTO registroVisitaEntity) {
         this.respuesta = respuesta;
-        this.registroVisitaEntity = registroVisitaEntity;
+        this.registroVisita = registroVisitaEntity;
     }
 
     public RespuestaType getRespuesta() {
@@ -31,11 +31,11 @@ public class RegistroVisitaResponse {
         this.respuesta = respuesta;
     }
 
-    public RegistroVisitaEntity getRegistroVisitaEntity() {
-        return registroVisitaEntity;
+    public RegistroVisitaDTO getRegistroVisita() {
+        return registroVisita;
     }
 
-    public void setRegistroVisitaEntity(RegistroVisitaEntity registroVisitaEntity) {
-        this.registroVisitaEntity = registroVisitaEntity;
+    public void setRegistroVisita(RegistroVisitaDTO registroVisita) {
+        this.registroVisita = registroVisita;
     }
 }

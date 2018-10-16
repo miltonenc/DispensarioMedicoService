@@ -13,8 +13,6 @@ public class RegistroVisitaRequest {
     private Long medicamentoId;
     private String sintoma;
     private String recomendacion;
-    private Date fechaDesde;
-    private Date fechaHasta;
     private int estado;
 
     public RegistroVisitaRequest() {
@@ -67,22 +65,6 @@ public class RegistroVisitaRequest {
 
     public void setRecomendacion(String recomendacion) {
         this.recomendacion = recomendacion;
-    }
-
-    public Date getFechaDesde() {
-        return fechaDesde;
-    }
-
-    public void setFechaDesde(Date fechaDesde) {
-        this.fechaDesde = fechaDesde;
-    }
-
-    public Date getFechaHasta() {
-        return fechaHasta;
-    }
-
-    public void setFechaHasta(Date fechaHasta) {
-        this.fechaHasta = fechaHasta;
     }
 
     public int getEstado() {

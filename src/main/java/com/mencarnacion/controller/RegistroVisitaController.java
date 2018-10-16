@@ -50,6 +50,30 @@ public class RegistroVisitaController {
         }
     }
 
+    @RequestMapping(value = ConstantesUtil.LISTADO_REGISTRO_PACIENTE, method = RequestMethod.GET, produces = ConstantesUtil.APPLICATION_JSON)
+    @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
+    public ListadoRegistroVisitaResponse obtenerListadoPorPaciente(Long pacienteId) {
+        try {
+            return registroVisitaService.obtenerListadoPorPaciente(pacienteId);
+        } catch (Exception e) {
+            log.debug(ConstantesUtil.OBTENER_REGISTRO_VISITA);
+            log.error(Arrays.toString(e.getStackTrace()));
+            return new ListadoRegistroVisitaResponse(new RespuestaType(TipoMensaje.ERROR_INTERNO_SERVICIO));
+        }
+    }
+
+    @RequestMapping(value = ConstantesUtil.LISTADO_REGISTRO_MEDICO, method = RequestMethod.GET, produces = ConstantesUtil.APPLICATION_JSON)
+    @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
+    public ListadoRegistroVisitaResponse obtenerListadoPorMedico(Long medicoId) {
+        try {
+            return registroVisitaService.obtenerListadoPorMedico(medicoId);
+        } catch (Exception e) {
+            log.debug(ConstantesUtil.OBTENER_REGISTRO_VISITA);
+            log.error(Arrays.toString(e.getStackTrace()));
+            return new ListadoRegistroVisitaResponse(new RespuestaType(TipoMensaje.ERROR_INTERNO_SERVICIO));
+        }
+    }
+
     @RequestMapping(value = ConstantesUtil.GUARDAR_REGISTRO_VISITA, method = RequestMethod.POST, produces = ConstantesUtil.APPLICATION_JSON)
     @CrossOrigin(origins = ConstantesUtil.CROSS_ORIGIN)
     public RegistroVisitaResponse guardar(@RequestBody RegistroVisitaRequest request) {

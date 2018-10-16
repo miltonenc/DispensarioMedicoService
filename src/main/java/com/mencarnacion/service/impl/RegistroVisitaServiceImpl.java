@@ -1,5 +1,6 @@
 package com.mencarnacion.service.impl;
 
+import com.mencarnacion.model.dto.RegistroVisitaDTO;
 import com.mencarnacion.model.entities.RegistroVisitaEntity;
 import com.mencarnacion.model.rest.request.RegistroVisitaRequest;
 import com.mencarnacion.model.rest.response.ListadoRegistroVisitaResponse;
@@ -49,7 +50,7 @@ public class RegistroVisitaServiceImpl implements RegistroVisitaService {
         entity = registroVisitaRepository.save(entity);
 
         if (Objects.nonNull(entity.getId())) {
-            response.setRegistroVisitaEntity(entity);
+            response.setRegistroVisita(new RegistroVisitaDTO(entity));
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_INSERTANDO_DATOS));
@@ -64,7 +65,7 @@ public class RegistroVisitaServiceImpl implements RegistroVisitaService {
         RegistroVisitaEntity entity = registroVisitaRepository.buscarPorId(id);
 
         if (Objects.nonNull(entity)) {
-            response.setRegistroVisitaEntity(entity);
+            response.setRegistroVisita(new RegistroVisitaDTO(entity));
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
@@ -79,7 +80,38 @@ public class RegistroVisitaServiceImpl implements RegistroVisitaService {
         List<RegistroVisitaEntity> entityList = registroVisitaRepository.obtenerListado();
 
         if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
-            response.setRegistroVisitaEntityList(entityList);
+            response.setRegistrosVisitas(response.covertirEntityToDTO(entityList));
+            response.setRespuesta(new RespuestaType(TipoMensaje.OK));
+        } else {
+            response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
+        }
+
+        return response;
+    }
+
+
+    @Override
+    public ListadoRegistroVisitaResponse obtenerListadoPorMedico(Long medicoId) {
+        ListadoRegistroVisitaResponse response = new ListadoRegistroVisitaResponse();
+        List<RegistroVisitaEntity> entityList = registroVisitaRepository.obtenerListadoPorMedico(medicoId);
+
+        if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
+            response.setRegistrosVisitas(response.covertirEntityToDTO(entityList));
+            response.setRespuesta(new RespuestaType(TipoMensaje.OK));
+        } else {
+            response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
+        }
+
+        return response;
+    }
+
+    @Override
+    public ListadoRegistroVisitaResponse obtenerListadoPorPaciente(Long pacienteId) {
+        ListadoRegistroVisitaResponse response = new ListadoRegistroVisitaResponse();
+        List<RegistroVisitaEntity> entityList = registroVisitaRepository.obtenerListadoPorPaciente(pacienteId);
+
+        if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
+            response.setRegistrosVisitas(response.covertirEntityToDTO(entityList));
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));

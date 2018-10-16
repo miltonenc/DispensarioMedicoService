@@ -25,19 +25,19 @@ public interface UbicacionRepository extends CrudRepository<UbicacionEntity, Lon
     UbicacionEntity buscarPorCodigo(@Param("pCodigo") String pCodigo);
 
 
-    @Query("Select S FROM UbicacionEntity S WHERE S.estado = 1 order by S.codigo asc")
+    @Query("Select S FROM UbicacionEntity S WHERE S.estado = 1 order by S.estante, S.tramo, S.celda ")
     @Transactional(readOnly = true)
     List<UbicacionEntity> obtenerListado();
 
 
     @Query("Select S FROM UbicacionEntity S WHERE S.estado = 1 and " +
-            " S.id not in (Select m FROM MedicamentoEntity m WHERE m.estado = 1 and m.ubicacion.id != null ) order by S.codigo asc")
+            " S.id not in (Select m FROM MedicamentoEntity m WHERE m.estado = 1 and m.ubicacion.id != null ) order by S.estante, S.tramo, S.celda ")
     @Transactional(readOnly = true)
     List<UbicacionEntity> obtenerListadoLibres();
 
 
     @Query("Select S FROM UbicacionEntity S WHERE S.estado = 1 and " +
-            " S.id in (Select m FROM MedicamentoEntity m WHERE m.estado = 1 and m.ubicacion.id != null ) order by S.codigo asc")
+            " S.id in (Select m FROM MedicamentoEntity m WHERE m.estado = 1 and m.ubicacion.id != null ) order by S.estante, S.tramo, S.celda ")
     @Transactional(readOnly = true)
     List<UbicacionEntity> obtenerListadoOcupadas();
 

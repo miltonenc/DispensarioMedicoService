@@ -42,6 +42,8 @@ public class ConstantesUtil implements Serializable {
     public static final String GUARDAR_PACIENTE = "/Paciente/Guardar";
 
     public static final String LISTADO_REGISTRO_VISITA = "/RegistroVisita/ObtenerListado";
+    public static final String LISTADO_REGISTRO_MEDICO = "/RegistroVisita/ObtenerListadoMedico";
+    public static final String LISTADO_REGISTRO_PACIENTE = "/RegistroVisita/ObtenerListadoPaciente";
     public static final String OBTENER_REGISTRO_VISITA = "/RegistroVisita/Obtener";
     public static final String GUARDAR_REGISTRO_VISITA = "/RegistroVisita/Guardar";
 

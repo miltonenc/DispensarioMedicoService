@@ -15,4 +15,8 @@ public interface RegistroVisitaService {
     RegistroVisitaResponse buscarPorId(Long id);
 
     ListadoRegistroVisitaResponse obtenerListado();
+
+    ListadoRegistroVisitaResponse obtenerListadoPorMedico(Long medicoId);
+
+    ListadoRegistroVisitaResponse obtenerListadoPorPaciente(Long pacienteId);
 }
