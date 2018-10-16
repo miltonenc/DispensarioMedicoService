@@ -31,7 +31,7 @@ public class MedicoEspecialidadServiceImpl implements MedicoEspecialidadService 
                 medicoEspecialidadRepository.isExisteRegistroPorId(request.getNombre().trim(), request.getId()) :
                 medicoEspecialidadRepository.isExisteRegistro(request.getNombre().trim());
 
-        if(isExisteRegistro){
+        if (isExisteRegistro) {
             response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
             return response;
         }

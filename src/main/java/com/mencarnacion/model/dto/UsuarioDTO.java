@@ -4,7 +4,6 @@ import com.mencarnacion.model.entities.MedicoEntity;
 import com.mencarnacion.model.entities.PacienteEntity;
 import com.mencarnacion.model.entities.UsuarioRolEntity;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,13 +27,13 @@ public class UsuarioDTO {
         this.password = password;
         this.estado = 1;
         this.roles = convertRolEtityToDTO(roles);
-        if(Objects.nonNull(medicos) && !medicos.isEmpty()){
+        if (Objects.nonNull(medicos) && !medicos.isEmpty()) {
             MedicoEntity medicoTmp = medicos.get(0);
             this.personaId = medicoTmp.getPersona().getId();
             this.nombre = medicoTmp.getPersona().getNombre();
             this.apellido = medicoTmp.getPersona().getApellido();
             this.dni = medicoTmp.getPersona().getDni();
-        }else if(Objects.nonNull(pacientes) && !pacientes.isEmpty()){
+        } else if (Objects.nonNull(pacientes) && !pacientes.isEmpty()) {
             PacienteEntity pacienteTmp = pacientes.get(0);
             this.personaId = pacienteTmp.getPersona().getId();
             this.nombre = pacienteTmp.getPersona().getNombre();
@@ -44,10 +43,10 @@ public class UsuarioDTO {
 
     }
 
-    private List<UsuarioRolDTO> convertRolEtityToDTO(List<UsuarioRolEntity> rolesEntity){
+    private List<UsuarioRolDTO> convertRolEtityToDTO(List<UsuarioRolEntity> rolesEntity) {
         List<UsuarioRolDTO> usuarioRolDTOS = new ArrayList<>();
 
-        for (UsuarioRolEntity rolEntity : rolesEntity){
+        for (UsuarioRolEntity rolEntity : rolesEntity) {
             usuarioRolDTOS.add(new UsuarioRolDTO(rolEntity.getId(), rolEntity.getRol().getCodigo(), rolEntity.getRol().getDescripcion()));
         }
 

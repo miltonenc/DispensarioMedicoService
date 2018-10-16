@@ -46,13 +46,13 @@ public class MedicoServiceImpl implements MedicoService {
         MedicoEntity entity = medicoRepository.buscarPorId(Objects.nonNull(request.getId()) ? request.getId() : null);
 
         boolean isExisteRegistro;
-        if(Objects.nonNull(entity) && Objects.nonNull(entity.getPersona().getId())){
-            isExisteRegistro =  personaRepository.isExisteRegistroPorId(request.getDni().trim(), entity.getPersona().getId());
-        }else{
+        if (Objects.nonNull(entity) && Objects.nonNull(entity.getPersona().getId())) {
+            isExisteRegistro = personaRepository.isExisteRegistroPorId(request.getDni().trim(), entity.getPersona().getId());
+        } else {
             isExisteRegistro = personaRepository.isExisteRegistro(request.getDni().trim());
         }
 
-        if(isExisteRegistro){
+        if (isExisteRegistro) {
             response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
             return response;
         }

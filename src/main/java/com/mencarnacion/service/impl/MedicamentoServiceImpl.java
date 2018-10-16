@@ -44,7 +44,7 @@ public class MedicamentoServiceImpl implements MedicamentoService {
                 medicamentoRepository.isExisteRegistroPorId(request.getNombre().trim(), request.getId(), request.getFabricanteId()) :
                 medicamentoRepository.isExisteRegistro(request.getNombre().trim(), request.getFabricanteId());
 
-        if(isExisteRegistro){
+        if (isExisteRegistro) {
             response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
             return response;
         }

@@ -1,9 +1,5 @@
 package com.mencarnacion.model.dto;
 
-import com.mencarnacion.model.entities.RolEntity;
-import com.mencarnacion.model.entities.UsuarioEntity;
-
-import javax.persistence.*;
 import java.util.Objects;
 
 public class UsuarioRolDTO {

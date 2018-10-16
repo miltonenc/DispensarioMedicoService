@@ -43,9 +43,9 @@ public class ListadoMedicamentoResponse {
         this.medicamentos = tipoPacienteEntityList;
     }
 
-    public List<MedicamentoDTO> convertEntityToDTO(List<MedicamentoEntity> medicamentoEntities){
+    public List<MedicamentoDTO> convertEntityToDTO(List<MedicamentoEntity> medicamentoEntities) {
         List<MedicamentoDTO> medicamentoTmp = new ArrayList<>();
-        for(MedicamentoEntity medicamentoEntity : medicamentoEntities){
+        for (MedicamentoEntity medicamentoEntity : medicamentoEntities) {
             medicamentoTmp.add(new MedicamentoDTO(medicamentoEntity));
         }
 

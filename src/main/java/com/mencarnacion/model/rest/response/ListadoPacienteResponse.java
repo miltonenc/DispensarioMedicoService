@@ -39,7 +39,7 @@ public class ListadoPacienteResponse {
 
     public void setPacientes(List<PacienteEntity> pacientes) {
 
-        for(PacienteEntity paciente : pacientes){
+        for (PacienteEntity paciente : pacientes) {
             paciente.getPersona().setMedicos(null);
             paciente.getPersona().setPacientes(null);
             paciente.getTipo().setPacientes(null);

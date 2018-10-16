@@ -38,7 +38,7 @@ public class ListadoTipoMedicamentoResponse {
     }
 
     public void setTipoMedicamentos(List<TipoMedicamentoEntity> tiposMedicamentos) {
-        for (TipoMedicamentoEntity tipoMedicamentoEntity: tiposMedicamentos) {
+        for (TipoMedicamentoEntity tipoMedicamentoEntity : tiposMedicamentos) {
             tipoMedicamentoEntity.setMedicamentos(null);
         }
         this.tiposMedicamentos = tiposMedicamentos;

@@ -27,9 +27,9 @@ public class ListadoRegistroVisitaResponse {
         this.registrosVisitas = registroVisitaEntityList;
     }
 
-    public List<RegistroVisitaDTO> covertirEntityToDTO(List<RegistroVisitaEntity> registroVisitaEntities){
+    public List<RegistroVisitaDTO> covertirEntityToDTO(List<RegistroVisitaEntity> registroVisitaEntities) {
         List<RegistroVisitaDTO> registrosVisitasTmp = new ArrayList<>();
-        for (RegistroVisitaEntity registroVisita : registroVisitaEntities){
+        for (RegistroVisitaEntity registroVisita : registroVisitaEntities) {
             registrosVisitasTmp.add(new RegistroVisitaDTO(registroVisita));
         }
 

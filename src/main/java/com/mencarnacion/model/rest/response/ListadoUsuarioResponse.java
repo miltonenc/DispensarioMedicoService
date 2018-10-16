@@ -2,7 +2,6 @@ package com.mencarnacion.model.rest.response;
 
 import com.mencarnacion.model.dto.UsuarioDTO;
 import com.mencarnacion.model.entities.UsuarioEntity;
-import com.mencarnacion.model.entities.UsuarioRolEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +42,8 @@ public class ListadoUsuarioResponse {
 
     public void setUsuario(List<UsuarioEntity> usuarioEntityList) {
         List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
-        if (Objects.nonNull(usuarioEntityList)){
-            for (UsuarioEntity usuarioEntity :usuarioEntityList){
+        if (Objects.nonNull(usuarioEntityList)) {
+            for (UsuarioEntity usuarioEntity : usuarioEntityList) {
                 usuarioDTOS.add(new UsuarioDTO(usuarioEntity.getId(), usuarioEntity.getUsuario(),
                         usuarioEntity.getPassword(), usuarioEntity.getRoles(), usuarioEntity.getMedicos(), usuarioEntity.getPacientes()));
             }

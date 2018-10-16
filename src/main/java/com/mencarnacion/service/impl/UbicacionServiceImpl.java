@@ -25,13 +25,13 @@ public class UbicacionServiceImpl implements UbicacionService {
 
     @Override
     public UbicacionResponse guardar(UbicacionRequest request) {
-       UbicacionResponse response = new UbicacionResponse();
+        UbicacionResponse response = new UbicacionResponse();
 
         boolean isExisteRegistro = Objects.nonNull(request.getId()) ?
                 ubicacionRepository.isExisteRegistroPorId(request.getId(), request.getEstante(), request.getTramo(), request.getCelda()) :
                 ubicacionRepository.isExisteRegistro(request.getEstante(), request.getTramo(), request.getCelda());
 
-        if(isExisteRegistro){
+        if (isExisteRegistro) {
             response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
             return response;
         }

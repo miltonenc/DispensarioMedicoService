@@ -31,7 +31,7 @@ public class LaboratorioFabricanteServiceImpl implements LaboratorioFabricanteSe
                 laboratorioFabricanteRepository.isExisteRegistroPorId(request.getNombre().trim(), request.getId()) :
                 laboratorioFabricanteRepository.isExisteRegistro(request.getNombre().trim());
 
-        if(isExisteRegistro){
+        if (isExisteRegistro) {
             response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
             return response;
         }

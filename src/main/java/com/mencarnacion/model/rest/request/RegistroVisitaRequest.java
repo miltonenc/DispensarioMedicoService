@@ -1,7 +1,5 @@
 package com.mencarnacion.model.rest.request;
 
-import java.util.Date;
-
 /**
  * Created by mencarnacion on 9/4/18.
  */

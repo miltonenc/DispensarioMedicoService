@@ -38,7 +38,7 @@ public class ListadoMedicoEspecialidadResponse {
     }
 
     public void setEspecialidades(List<MedicoEspecialidadEntity> especialidades) {
-        for(MedicoEspecialidadEntity medicoEspecialidadEntity : especialidades){
+        for (MedicoEspecialidadEntity medicoEspecialidadEntity : especialidades) {
             medicoEspecialidadEntity.setMedicos(null);
         }
         this.especialidades = especialidades;

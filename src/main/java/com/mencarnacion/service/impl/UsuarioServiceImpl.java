@@ -1,12 +1,10 @@
 package com.mencarnacion.service.impl;
 
 import com.mencarnacion.model.entities.UsuarioEntity;
-import com.mencarnacion.model.rest.request.UsuarioRequest;
 import com.mencarnacion.model.rest.response.ListadoUsuarioResponse;
 import com.mencarnacion.model.rest.response.RespuestaType;
 import com.mencarnacion.model.rest.response.UsuarioResponse;
 import com.mencarnacion.repository.UsuarioRepository;
-import com.mencarnacion.service.UsuarioService;
 import com.mencarnacion.service.UsuarioService;
 import com.mencarnacion.util.TipoMensaje;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +38,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public UsuarioResponse login(String pUsuario, String pPassword){
+    public UsuarioResponse login(String pUsuario, String pPassword) {
         UsuarioResponse response = new UsuarioResponse();
         UsuarioEntity entity = UsuarioRepository.login(pUsuario, pPassword);
 
@@ -86,6 +84,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public boolean isExisteUsuario(String pUsuario) {
-       return UsuarioRepository.isExisteUsuario(pUsuario);
+        return UsuarioRepository.isExisteUsuario(pUsuario);
     }
 }

@@ -1,6 +1,5 @@
 package com.mencarnacion.controller;
 
-import com.mencarnacion.model.rest.request.UsuarioRequest;
 import com.mencarnacion.model.rest.response.ListadoUsuarioResponse;
 import com.mencarnacion.model.rest.response.RespuestaType;
 import com.mencarnacion.model.rest.response.UsuarioResponse;

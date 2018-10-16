@@ -39,21 +39,41 @@ public class RegistroVisitaServiceImpl implements RegistroVisitaService {
     @Override
     public RegistroVisitaResponse guardar(RegistroVisitaRequest request) {
         RegistroVisitaResponse response = new RegistroVisitaResponse();
-        RegistroVisitaEntity entity = new RegistroVisitaEntity();
+        RegistroVisitaEntity entity = registroVisitaRepository.buscarPorId(request.getId());
 
-        entity.setSintoma(request.getSintoma());
-        entity.setRecomendacion(request.getRecomendacion());
-        entity.setPaciente(pacienteRepository.buscarPorId(request.getPacienteId()));
-        entity.setMedicamento(medicamentoRepository.buscarPorId(request.getMedicamentoId()));
-        entity.setMedico(medicoRepository.buscarPorId(request.getMedicoId()));
+        if (Objects.isNull(entity)) {
+            entity = new RegistroVisitaEntity();
+            entity.setSintoma(request.getSintoma());
+            entity.setRecomendacion(request.getRecomendacion());
+            entity.setPaciente(pacienteRepository.buscarPorId(request.getPacienteId()));
+            entity.setMedicamento(medicamentoRepository.buscarPorId(request.getMedicamentoId()));
+            entity.setMedico(medicoRepository.buscarPorId(request.getMedicoId()));
 
-        entity = registroVisitaRepository.save(entity);
+            entity = registroVisitaRepository.save(entity);
 
-        if (Objects.nonNull(entity.getId())) {
-            response.setRegistroVisita(new RegistroVisitaDTO(entity));
-            response.setRespuesta(new RespuestaType(TipoMensaje.OK));
+            if (Objects.nonNull(entity.getId())) {
+                response.setRegistroVisita(new RegistroVisitaDTO(entity));
+                response.setRespuesta(new RespuestaType(TipoMensaje.OK));
+            } else {
+                response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_INSERTANDO_DATOS));
+            }
+
         } else {
-            response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_INSERTANDO_DATOS));
+            entity.setSintoma(request.getSintoma());
+            entity.setRecomendacion(request.getRecomendacion());
+            entity.setPaciente(pacienteRepository.buscarPorId(request.getPacienteId()));
+            entity.setMedicamento(medicamentoRepository.buscarPorId(request.getMedicamentoId()));
+            entity.setMedico(medicoRepository.buscarPorId(request.getMedicoId()));
+            entity.setEstado(request.getEstado());
+
+            entity = registroVisitaRepository.save(entity);
+
+            if (Objects.nonNull(entity.getId())) {
+                response.setRegistroVisita(new RegistroVisitaDTO(entity));
+                response.setRespuesta(new RespuestaType(TipoMensaje.OK));
+            } else {
+                response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_ACTUALIZANDO_DATOS));
+            }
         }
 
         return response;

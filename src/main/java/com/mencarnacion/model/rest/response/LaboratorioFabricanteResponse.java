@@ -37,7 +37,7 @@ public class LaboratorioFabricanteResponse {
     }
 
     public void setLaboratorioFabricante(LaboratorioFabricanteEntity laboratorioFabricante) {
-        for(MedicamentoEntity medicamentoEntity : laboratorioFabricante.getMedicamentos()){
+        for (MedicamentoEntity medicamentoEntity : laboratorioFabricante.getMedicamentos()) {
             medicamentoEntity.setFabricante(null);
             medicamentoEntity.setRegistrosVisitas(null);
             medicamentoEntity.getTipo().setMedicamentos(null);

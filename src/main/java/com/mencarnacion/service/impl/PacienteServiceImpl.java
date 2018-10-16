@@ -48,7 +48,7 @@ public class PacienteServiceImpl implements PacienteService {
                 personaRepository.isExisteRegistroPorId(request.getDni().trim(), entity.getPersona().getId()) :
                 personaRepository.isExisteRegistro(request.getDni().trim());
 
-        if(isExisteRegistro){
+        if (isExisteRegistro) {
             response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
             return response;
         }
@@ -106,12 +106,16 @@ public class PacienteServiceImpl implements PacienteService {
         return response;
     }
 
-    private Long obtenerRolByTipoPaciente(final Long tipoPaciente){
-        switch (tipoPaciente.intValue()){
-            case 1: return Rol.EMPLEADO.getId();
-            case 2: return Rol.ESTUDIANTE.getId();
-            case 3: return Rol.PROFESOR.getId();
-            default: return Rol.ESTUDIANTE.getId();
+    private Long obtenerRolByTipoPaciente(final Long tipoPaciente) {
+        switch (tipoPaciente.intValue()) {
+            case 1:
+                return Rol.EMPLEADO.getId();
+            case 2:
+                return Rol.ESTUDIANTE.getId();
+            case 3:
+                return Rol.PROFESOR.getId();
+            default:
+                return Rol.ESTUDIANTE.getId();
         }
     }
 

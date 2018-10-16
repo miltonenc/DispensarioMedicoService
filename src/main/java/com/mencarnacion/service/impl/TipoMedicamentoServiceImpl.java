@@ -35,7 +35,7 @@ public class TipoMedicamentoServiceImpl implements TipoMedicamentoService {
                 tipoMedicamentoRepository.isExisteRegistroPorId(request.getNombre().trim(), request.getId()) :
                 tipoMedicamentoRepository.isExisteRegistro(request.getNombre().trim());
 
-        if(isExisteRegistro){
+        if (isExisteRegistro) {
             response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_DATOS_DUPLICADOS));
             return response;
         }
