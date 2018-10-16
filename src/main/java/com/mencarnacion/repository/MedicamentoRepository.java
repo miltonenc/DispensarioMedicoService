@@ -28,14 +28,16 @@ public interface MedicamentoRepository extends CrudRepository<MedicamentoEntity,
 
     @Query("select CASE WHEN (COUNT(S.id) > 0) THEN true  ELSE false END " +
             " FROM MedicamentoEntity S WHERE UPPER(S.nombre) = UPPER(:pNombre)" +
-            " AND S.id != :pId AND S.estado = 1 ")
+            " AND S.id != :pId AND S.fabricante.id = :pFabricanteId AND S.estado = 1 ")
     @Transactional(readOnly = true)
-    boolean isExisteRegistroPorId(@Param("pNombre") String pNombre, @Param("pId") Long pId);
+    boolean isExisteRegistroPorId(@Param("pNombre") String pNombre, @Param("pId") Long pId,
+                                  @Param("pFabricanteId") Long pFabricanteId);
 
 
 
     @Query("Select CASE WHEN (COUNT(S.id) > 0) THEN true  ELSE false END " +
-            " FROM MedicamentoEntity S WHERE UPPER(S.nombre) = UPPER(:pNombre) AND S.estado = 1 ")
+            " FROM MedicamentoEntity S WHERE UPPER(S.nombre) = UPPER(:pNombre) AND S.fabricante.id = :pFabricanteId " +
+            " AND S.estado = 1 ")
     @Transactional(readOnly = true)
-    boolean isExisteRegistro(@Param("pNombre") String pNombre);
+    boolean isExisteRegistro(@Param("pNombre") String pNombre, @Param("pFabricanteId") Long pFabricanteId);
 }
