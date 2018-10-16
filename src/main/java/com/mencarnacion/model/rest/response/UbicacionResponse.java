@@ -8,7 +8,7 @@ import com.mencarnacion.model.entities.UbicacionEntity;
 public class UbicacionResponse {
 
     private RespuestaType respuesta;
-    private UbicacionEntity ubicacionEntity;
+    private UbicacionEntity ubicacion;
 
     public UbicacionResponse() {
         super();
@@ -20,7 +20,7 @@ public class UbicacionResponse {
 
     public UbicacionResponse(RespuestaType respuesta, UbicacionEntity ubicacionEntity) {
         this.respuesta = respuesta;
-        this.ubicacionEntity = ubicacionEntity;
+        this.ubicacion = ubicacionEntity;
     }
 
     public RespuestaType getRespuesta() {
@@ -31,11 +31,12 @@ public class UbicacionResponse {
         this.respuesta = respuesta;
     }
 
-    public UbicacionEntity getUbicacionEntity() {
-        return ubicacionEntity;
+    public UbicacionEntity getUbicacion() {
+        return ubicacion;
     }
 
-    public void setUbicacionEntity(UbicacionEntity ubicacionEntity) {
-        this.ubicacionEntity = ubicacionEntity;
+    public void setUbicacion(UbicacionEntity ubicacion) {
+        ubicacion.setMedicamentos(null);
+        this.ubicacion = ubicacion;
     }
 }

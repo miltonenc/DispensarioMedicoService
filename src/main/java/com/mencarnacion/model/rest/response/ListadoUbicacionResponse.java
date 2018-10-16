@@ -10,7 +10,7 @@ import java.util.List;
 public class ListadoUbicacionResponse {
 
     private RespuestaType respuesta;
-    private List<UbicacionEntity> ubicacionEntityList;
+    private List<UbicacionEntity> ubicaciones;
 
     public ListadoUbicacionResponse() {
         super();
@@ -22,7 +22,7 @@ public class ListadoUbicacionResponse {
 
     public ListadoUbicacionResponse(RespuestaType respuesta, List<UbicacionEntity> ubicacionEntityList) {
         this.respuesta = respuesta;
-        this.ubicacionEntityList = ubicacionEntityList;
+        this.ubicaciones = ubicacionEntityList;
     }
 
     public RespuestaType getRespuesta() {
@@ -33,11 +33,14 @@ public class ListadoUbicacionResponse {
         this.respuesta = respuesta;
     }
 
-    public List<UbicacionEntity> getUbicacionEntityList() {
-        return ubicacionEntityList;
+    public List<UbicacionEntity> getUbicaciones() {
+        return ubicaciones;
     }
 
-    public void setUbicacionEntityList(List<UbicacionEntity> ubicacionEntityList) {
-        this.ubicacionEntityList = ubicacionEntityList;
+    public void setUbicaciones(List<UbicacionEntity> ubicaciones) {
+        for (UbicacionEntity ubicacionEntity : ubicaciones) {
+            ubicacionEntity.setMedicamentos(null);
+        }
+        this.ubicaciones = ubicaciones;
     }
 }

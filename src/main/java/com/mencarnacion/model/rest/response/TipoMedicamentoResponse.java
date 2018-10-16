@@ -36,6 +36,7 @@ public class TipoMedicamentoResponse {
     }
 
     public void setTipoMedicamento(TipoMedicamentoEntity tipoMedicamento) {
+        tipoMedicamento.setMedicamentos(null);
         this.tipoMedicamento = tipoMedicamento;
     }
 }

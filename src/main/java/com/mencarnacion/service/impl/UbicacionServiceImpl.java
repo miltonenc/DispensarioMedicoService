@@ -50,7 +50,7 @@ public class UbicacionServiceImpl implements UbicacionService {
             entity = ubicacionRepository.save(entity);
 
             if (Objects.nonNull(entity.getId())) {
-                response.setUbicacionEntity(entity);
+                response.setUbicacion(entity);
                 response.setRespuesta(new RespuestaType(TipoMensaje.OK));
             } else {
                 response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_ACTUALIZANDO_DATOS));
@@ -68,7 +68,7 @@ public class UbicacionServiceImpl implements UbicacionService {
             entity = ubicacionRepository.save(entity);
 
             if (Objects.nonNull(entity.getId())) {
-                response.setUbicacionEntity(entity);
+                response.setUbicacion(entity);
                 response.setRespuesta(new RespuestaType(TipoMensaje.OK));
             } else {
                 response.setRespuesta(new RespuestaType(TipoMensaje.ERROR_INSERTANDO_DATOS));
@@ -84,7 +84,7 @@ public class UbicacionServiceImpl implements UbicacionService {
         UbicacionEntity entity = ubicacionRepository.buscarPorId(id);
 
         if (Objects.nonNull(entity)) {
-            response.setUbicacionEntity(entity);
+            response.setUbicacion(entity);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
@@ -99,7 +99,7 @@ public class UbicacionServiceImpl implements UbicacionService {
         UbicacionEntity entity = ubicacionRepository.buscarPorCodigo(pCodigo);
 
         if (Objects.nonNull(entity)) {
-            response.setUbicacionEntity(entity);
+            response.setUbicacion(entity);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
@@ -114,7 +114,7 @@ public class UbicacionServiceImpl implements UbicacionService {
         List<UbicacionEntity> entityList = ubicacionRepository.obtenerListado();
 
         if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
-            response.setUbicacionEntityList(entityList);
+            response.setUbicaciones(entityList);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
@@ -129,7 +129,7 @@ public class UbicacionServiceImpl implements UbicacionService {
         List<UbicacionEntity> entityList = ubicacionRepository.obtenerListadoLibres();
 
         if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
-            response.setUbicacionEntityList(entityList);
+            response.setUbicaciones(entityList);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
@@ -144,7 +144,7 @@ public class UbicacionServiceImpl implements UbicacionService {
         List<UbicacionEntity> entityList = ubicacionRepository.obtenerListadoOcupadas();
 
         if (Objects.nonNull(entityList) && !entityList.isEmpty()) {
-            response.setUbicacionEntityList(entityList);
+            response.setUbicaciones(entityList);
             response.setRespuesta(new RespuestaType(TipoMensaje.OK));
         } else {
             response.setRespuesta(new RespuestaType(TipoMensaje.NO_SE_ENCONTRARON_DATOS));
