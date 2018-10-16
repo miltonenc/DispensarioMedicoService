@@ -1,6 +1,7 @@
 package com.mencarnacion.model.rest.response;
 
 import com.mencarnacion.model.entities.LaboratorioFabricanteEntity;
+import com.mencarnacion.model.entities.MedicamentoEntity;
 
 import java.util.List;
 
@@ -38,6 +39,14 @@ public class ListadoLaboratorioFabricanteResponse {
     }
 
     public void setLaboratorioFabricantes(List<LaboratorioFabricanteEntity> laboratorioFabricantes) {
+        for (LaboratorioFabricanteEntity laboratorioFabricante : laboratorioFabricantes){
+            for(MedicamentoEntity medicamentoEntity : laboratorioFabricante.getMedicamentos()){
+                medicamentoEntity.setRegistrosVisitas(null);
+                medicamentoEntity.setFabricante(null);
+                medicamentoEntity.getTipo().setMedicamentos(null);
+                medicamentoEntity.getUbicacion().setMedicamentos(null);
+            }
+        }
         this.laboratorioFabricantes = laboratorioFabricantes;
     }
 }

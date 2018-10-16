@@ -1,6 +1,7 @@
 package com.mencarnacion.model.rest.response;
 
 import com.mencarnacion.model.entities.LaboratorioFabricanteEntity;
+import com.mencarnacion.model.entities.MedicamentoEntity;
 
 /**
  * Created by mencarnacion on 9/4/18.
@@ -36,6 +37,12 @@ public class LaboratorioFabricanteResponse {
     }
 
     public void setLaboratorioFabricante(LaboratorioFabricanteEntity laboratorioFabricante) {
+        for(MedicamentoEntity medicamentoEntity : laboratorioFabricante.getMedicamentos()){
+            medicamentoEntity.setFabricante(null);
+            medicamentoEntity.setRegistrosVisitas(null);
+            medicamentoEntity.getTipo().setMedicamentos(null);
+            medicamentoEntity.getUbicacion().setMedicamentos(null);
+        }
         this.laboratorioFabricante = laboratorioFabricante;
     }
 }
